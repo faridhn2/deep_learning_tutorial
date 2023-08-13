@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://neptune.ai/blog/installing-tensorflow-2-gpu-guide -->
+<html lang="en-US" style="scroll-behavior: smooth;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Installing TensorFlow 2 GPU [Step-by-Step Guide]</title><link rel="stylesheet" href="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/4fc65e10ef1024053a09b0f6c1b35dba.css" media="all" data-minify="1">
+
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+        <link rel="preload" href="https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-semibold.woff2" as="font" type="font/woff2" crossorigin="">
+
+        <link rel="preload" href="https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-regular.woff2" as="font" type="font/woff2" crossorigin="">
+
+        <link rel="preload" href="https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-bold.woff2" as="font" type="font/woff2" crossorigin="">
+                <!-- Google Tag Manager -->
+        <script type="text/javascript" data-cfasync="false" charset="UTF-8" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/auryc.lib.js.download"></script><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/js"></script><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/bat.js.download"></script><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/uwt.js.download"></script><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/insight.min.js.download"></script><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pixel.js.download"></script><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/analytics.js.download"></script><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/heap-3102000718.js.download"></script><script src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/banner.js.download" type="text/javascript" id="cookieBanner-4404891" data-cookieconsent="ignore" data-hs-ignore="true" data-loader="hs-scriptloader" data-hsjs-portal="4404891" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/4404891.js.download" type="text/javascript" id="hs-analytics"></script><script src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/collectedforms.js.download" type="text/javascript" id="CollectedForms-4404891" crossorigin="anonymous" data-leadin-portal-id="4404891" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="4404891" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/gtm.js.download"></script><script>(function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MZNL966');</script>
+        <!-- End Google Tag Manager -->
+        
+	<!-- This site is optimized with the Yoast SEO plugin v20.13 - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="Step-by-step guide to installing TensorFlow 2 with GPU support across Windows, MacOS, and Linux platforms.">
+	<link rel="canonical" href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Installing TensorFlow 2 GPU [Step-by-Step Guide]">
+	<meta property="og:description" content="Step-by-step guide to installing TensorFlow 2 with GPU support across Windows, MacOS, and Linux platforms.">
+	<meta property="og:url" content="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide">
+	<meta property="og:site_name" content="neptune.ai">
+	<meta property="article:publisher" content="https://www.facebook.com/neptuneML/">
+	<meta property="article:published_time" content="2022-07-22T06:16:21+00:00">
+	<meta property="article:modified_time" content="2023-08-10T11:50:40+00:00">
+	<meta property="og:image" content="https://neptune.ai/wp-content/uploads/2022/07/blog_feature_image_016567_6_2_10_6.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="author" content="Harshil Patel">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:creator" content="@neptuneml">
+	<meta name="twitter:site" content="@neptuneml">
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="Harshil Patel">
+	<meta name="twitter:label2" content="Est. reading time">
+	<meta name="twitter:data2" content="11 minutes">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#article","isPartOf":{"@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide"},"author":{"name":"Harshil Patel","@id":"https://neptune.ai/#/schema/person/88e51312bd763aa0b91012ac1ebd683d"},"headline":"Installing TensorFlow 2 GPU [Step-by-Step Guide]","datePublished":"2022-07-22T06:16:21+00:00","dateModified":"2023-08-10T11:50:40+00:00","mainEntityOfPage":{"@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide"},"wordCount":1552,"commentCount":0,"publisher":{"@id":"https://neptune.ai/#organization"},"image":{"@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#primaryimage"},"thumbnailUrl":"https://i0.wp.com/neptune.ai/wp-content/uploads/2022/07/blog_feature_image_016567_6_2_10_6.jpg?fit=1200%2C630&ssl=1","articleSection":["Machine Learning Tools"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#respond"]}]},{"@type":"WebPage","@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide","url":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide","name":"Installing TensorFlow 2 GPU [Step-by-Step Guide]","isPartOf":{"@id":"https://neptune.ai/#website"},"primaryImageOfPage":{"@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#primaryimage"},"image":{"@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#primaryimage"},"thumbnailUrl":"https://i0.wp.com/neptune.ai/wp-content/uploads/2022/07/blog_feature_image_016567_6_2_10_6.jpg?fit=1200%2C630&ssl=1","datePublished":"2022-07-22T06:16:21+00:00","dateModified":"2023-08-10T11:50:40+00:00","description":"Step-by-step guide to installing TensorFlow 2 with GPU support across Windows, MacOS, and Linux platforms.","breadcrumb":{"@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://neptune.ai/blog/installing-tensorflow-2-gpu-guide"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#primaryimage","url":"https://i0.wp.com/neptune.ai/wp-content/uploads/2022/07/blog_feature_image_016567_6_2_10_6.jpg?fit=1200%2C630&ssl=1","contentUrl":"https://i0.wp.com/neptune.ai/wp-content/uploads/2022/07/blog_feature_image_016567_6_2_10_6.jpg?fit=1200%2C630&ssl=1","width":1200,"height":630},{"@type":"BreadcrumbList","@id":"https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"","item":"https://neptune.ai/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://neptune.ai/blog"},{"@type":"ListItem","position":3,"name":"Machine Learning Tools","item":"https://neptune.ai/blog/category/machine-learning-tools"},{"@type":"ListItem","position":4,"name":"Installing TensorFlow 2 GPU [Step-by-Step Guide]"}]},{"@type":"WebSite","@id":"https://neptune.ai/#website","url":"https://neptune.ai/","name":"neptune.ai","description":"ML metadata store: track experiments, register models, integrate with any MLOps tool stack.","publisher":{"@id":"https://neptune.ai/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://neptune.ai/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://neptune.ai/#organization","name":"neptune.ai","url":"https://neptune.ai/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://neptune.ai/#/schema/logo/image/","url":"https://neptune.ai/wp-content/uploads/2022/11/logo-neptune.svg","contentUrl":"https://neptune.ai/wp-content/uploads/2022/11/logo-neptune.svg","width":1,"height":1,"caption":"neptune.ai"},"image":{"@id":"https://neptune.ai/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/neptuneML/","https://twitter.com/neptuneml","https://www.linkedin.com/company/neptuneml/","https://www.youtube.com/channel/UC59luZ4B27hEDRp5JJOERlQ"]},{"@type":"Person","@id":"https://neptune.ai/#/schema/person/88e51312bd763aa0b91012ac1ebd683d","name":"Harshil Patel","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://neptune.ai/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/78fd39e5f55a1b1584f1c6bd6c4e1ce5?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/78fd39e5f55a1b1584f1c6bd6c4e1ce5?s=96&d=mm&r=g","caption":"Harshil Patel"},"description":"Android Developer and Machine Learning enthusiast. I have a passion for developing mobile applications, making innovative products, and helping users.","url":"https://neptune.ai/blog/author/harshil-patel"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="https://js.hs-scripts.com/">
+<link rel="dns-prefetch" href="https://stats.wp.com/">
+<link rel="dns-prefetch" href="https://c0.wp.com/">
+<link rel="dns-prefetch" href="https://i0.wp.com/">
+
+        <style>
+            @font-face {
+                font-family: 'IBM Plex Sans';
+                src: local('ibm_plex_sansbold'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-bold.woff2) format('woff2'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-bold.woff) format('woff');
+                font-weight: 700;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'IBM Plex Sans';
+                src: local('ibm_plex_sanssemibold'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-semibold.woff2) format('woff2'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-semibold.woff) format('woff');
+                font-weight: 600;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'IBM Plex Sans';
+                src: local('ibm_plex_sansregular'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-regular.woff2) format('woff2'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-regular.woff) format('woff');
+                font-weight: 400;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'IBM Plex Sans';
+                src: local('ibm_plex_sansitalic'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-italic.woff2) format('woff2'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexsans-italic.woff) format('woff');
+                font-weight: 400;
+                font-style: italic;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'IBM Plex Mono';
+                src: local('ibm_plex_monomedium'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexmono-medium.woff2) format('woff2'),
+                url(https://neptune.ai/wp-content/themes/neptune/dist/fonts/ibmplexmono-medium.woff) format('woff');
+                font-weight: 500;
+                font-style: normal;
+                font-display: swap;
+            }
+        </style>
+        
+<style id="wombat-main-styles-inline-css" type="text/css">
+
+        body {
+            --submenu-width: 160px;
+        }
+</style>
+
+
+
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+
+
+
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--straygray: #ddd;--wp--preset--color--clr-gray-40: #DEE1E4;--wp--preset--color--clr-paragraph-color: #BABEC3;--wp--preset--color--clr-black: #111213;--wp--preset--color--clr-indygo-60: #7A86D5;--wp--preset--color--clr-teal-60: #55B5A6;--wp--preset--color--clr-cyan-60: #52A8D0;--wp--preset--color--clr-blue-60: #4E99EE;--wp--preset--color--clr-violet-50: #838CF1;--wp--preset--color--clr-purple-50: #A591EE;--wp--preset--color--clr-pink-60: #C35CDC;--wp--preset--color--clr-red-60: #E14F62;--wp--preset--color--clr-yellow-60: #DFA045;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 12px;--wp--preset--font-size--medium: 16px;--wp--preset--font-size--large: 18px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--tiny: 10px;--wp--preset--font-size--normal: 14px;--wp--preset--font-size--huge: 20px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+
+
+<link rel="shortlink" href="https://neptune.ai/?p=5640">
+	<style>img#wpstats{display:none}</style>
+		<style>.cmplz-hidden{display:none!important;}</style>
+        <link rel="apple-touch-icon" sizes="180x180" href="https://neptune.ai/wp-content/themes/neptune/img/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="https://neptune.ai/wp-content/themes/neptune/img/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://neptune.ai/wp-content/themes/neptune/img/favicon/favicon-16x16.png">
+        <link rel="manifest" href="https://neptune.ai/wp-content/themes/neptune/img/favicon/site.webmanifest">
+        <link rel="mask-icon" href="https://neptune.ai/wp-content/themes/neptune/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#000000">
+        <meta name="theme-color" content="#000000">
+
+        <link rel="icon" href="https://i0.wp.com/neptune.ai/wp-content/uploads/2022/11/cropped-Signet-1.png?fit=32%2C32&amp;ssl=1" sizes="32x32">
+<link rel="icon" href="https://i0.wp.com/neptune.ai/wp-content/uploads/2022/11/cropped-Signet-1.png?fit=192%2C192&amp;ssl=1" sizes="192x192">
+<link rel="apple-touch-icon" href="https://i0.wp.com/neptune.ai/wp-content/uploads/2022/11/cropped-Signet-1.png?fit=180%2C180&amp;ssl=1">
+<meta name="msapplication-TileImage" content="https://i0.wp.com/neptune.ai/wp-content/uploads/2022/11/cropped-Signet-1.png?fit=270%2C270&amp;ssl=1">
+<style type="text/css" id="wp-custom-css">/*------current------*/
+.separator--pricing{
+    margin: 1.5rem 0;
+    border-color: #44474A;
+    margin-bottom: 1.5rem;
+}
+#pricing-boxes p.has-text-align-center{
+    text-align: center;
+}
+#pricing-boxes .c-box .block-buttons-group{
+    min-height: 4.5rem;
+}
+#pricing-boxes .c-box ul>li{
+    font-size: 14px;
+}
+#pricing-boxes .c-box{
+    overflow:visible;
+}
+.page-id-976 .block_accordion__item--expanded .block-accordion__content{
+    max-height: 3000px!important;
+}
+#neptune-contact-form .b-group-of-boxes__grid{
+    align-items: flex-start;
+}
+
+/*-----free trial------*/
+.page-id-27665 .page-header,
+.page-id-27665 .page-footer{
+    display:none
+}
+.page-id-27665 .page-main{
+    padding-bottom: 4rem;
+}
+
+/*---mega-menu----*/
+/*.c-menu-article--img-v2 img{
+	max-width:100%;
+	max-height:100%;
+	object-fit:contain;
+	-o-object-fit:contain;
+}*/</style>	<link href="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/banner-1-optin.css" type="text/css" rel="stylesheet"><meta http-equiv="origin-trial" content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><script type="text/javascript" async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/f.txt"></script><script async="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/fbt.js.download"></script><script src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/97011748.js.download" type="text/javascript" async="" data-ueto="ueto_2e1e3b54ec"></script><script src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/container.js.download" data-cfasync="false" async="true" data-vendor="auryc" data-role="container" charset="utf-8"></script><link rel="prefetch" href="https://neptune.ai/blog/debug-and-visualize-tensorflow-keras-model"><link rel="prefetch" href="https://neptune.ai/blog/keep-track-of-tensorflow-keras-model-development-with-neptune"><link rel="prefetch" href="https://neptune.ai/blog/category/computer-vision"><link rel="prefetch" href="https://neptune.ai/blog/category/machine-learning-tools"></head>
+
+	<body data-cmplz="1" class="post-template-default single single-post postid-5640 single-format-standard top-navbar-banner-active cmplz-functional cmplz-eu cmplz-optin" style=""><div id="cmplz-cookiebanner-container"><div class="cmplz-cookiebanner banner-1 optin cmplz-bottom-left cmplz-categories-type-no cmplz-dismissed" aria-modal="true" data-nosnippet="true" role="dialog" aria-live="polite" aria-labelledby="cmplz-header-1-optin" aria-describedby="cmplz-message-1-optin">
+	<div class="cmplz-header">
+		<div class="cmplz-logo"></div>
+		<div class="cmplz-title" id="cmplz-header-1-optin">Manage Cookie Consent</div>
+		<div class="cmplz-close" tabindex="0" role="button" aria-label="close-dialog">
+			<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+		</div>
+	</div>
+
+	<div class="cmplz-divider cmplz-divider-header"></div>
+	<div class="cmplz-body">
+		<div class="cmplz-message" id="cmplz-message-1-optin">To provide the best experiences, we use technologies like cookies to store and/or access device information. Find out more in our <a href="https://neptune.ai/wp-content/uploads/2022/10/privacy-policy.pdf" title="privacy policy" target="_blank">privacy policy.</a></div>
+		<!-- categories start -->
+		<div class="cmplz-categories">
+			<details class="cmplz-category cmplz-functional">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Functional</span>
+							<span class="cmplz-always-active">
+								<span class="cmplz-banner-checkbox">
+									<input type="checkbox" id="cmplz-functional-optin" data-category="cmplz_functional" class="cmplz-consent-checkbox cmplz-functional _ar_hide_" size="40" value="1" _ar_hide_="width:0px;height:0px;margin:3px 3px 3px 4px;position:static;display:none;">
+									<label class="cmplz-label" for="cmplz-functional-optin" tabindex="0"><span class="screen-reader-text">Functional</span></label>
+								</span>
+								Always active							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-functional">The technical storage or access is strictly necessary for the legitimate purpose of enabling the use of a specific service explicitly requested by the subscriber or user, or for the sole purpose of carrying out the transmission of a communication over an electronic communications network.</span>
+				</div>
+			</details>
+
+			<details class="cmplz-category cmplz-preferences">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Preferences</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-preferences-optin" data-category="cmplz_preferences" class="cmplz-consent-checkbox cmplz-preferences _ar_hide_" size="40" value="1" _ar_hide_="width:0px;height:0px;margin:3px 3px 3px 4px;position:static;display:none;">
+								<label class="cmplz-label" for="cmplz-preferences-optin" tabindex="0"><span class="screen-reader-text">Preferences</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-preferences">The technical storage or access is necessary for the legitimate purpose of storing preferences that are not requested by the subscriber or user.</span>
+				</div>
+			</details>
+
+			<details class="cmplz-category cmplz-statistics">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Statistics</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-statistics-optin" data-category="cmplz_statistics" class="cmplz-consent-checkbox cmplz-statistics _ar_hide_" size="40" value="1" _ar_hide_="width:0px;height:0px;margin:3px 3px 3px 4px;position:static;display:block;">
+								<label class="cmplz-label" for="cmplz-statistics-optin" tabindex="0"><span class="screen-reader-text">Statistics</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-statistics">The technical storage or access that is used exclusively for statistical purposes.</span>
+					<span class="cmplz-description-statistics-anonymous">The technical storage or access that is used exclusively for anonymous statistical purposes. Without a subpoena, voluntary compliance on the part of your Internet Service Provider, or additional records from a third party, information stored or retrieved for this purpose alone cannot usually be used to identify you.</span>
+				</div>
+			</details>
+			<details class="cmplz-category cmplz-marketing">
+				<summary>
+						<span class="cmplz-category-header">
+							<span class="cmplz-category-title">Marketing</span>
+							<span class="cmplz-banner-checkbox">
+								<input type="checkbox" id="cmplz-marketing-optin" data-category="cmplz_marketing" class="cmplz-consent-checkbox cmplz-marketing _ar_hide_" size="40" value="1" _ar_hide_="width:0px;height:0px;margin:3px 3px 3px 4px;position:static;display:block;">
+								<label class="cmplz-label" for="cmplz-marketing-optin" tabindex="0"><span class="screen-reader-text">Marketing</span></label>
+							</span>
+							<span class="cmplz-icon cmplz-open">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="18"><path d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>
+							</span>
+						</span>
+				</summary>
+				<div class="cmplz-description">
+					<span class="cmplz-description-marketing">The technical storage or access is required to create user profiles to send advertising, or to track the user on a website or across several websites for similar marketing purposes.</span>
+				</div>
+			</details>
+		</div><!-- categories end -->
+			</div>
+
+	<div class="cmplz-links cmplz-information">
+		<a class="cmplz-link cmplz-manage-options cookie-statement" href="https://neptune.ai/contact-us#cmplz-manage-consent-container" data-relative_url="#cmplz-manage-consent-container">Manage options</a>
+		<a class="cmplz-link cmplz-manage-third-parties cookie-statement" href="https://neptune.ai/contact-us#cmplz-cookies-overview" data-relative_url="#cmplz-cookies-overview">Manage services</a>
+		<a class="cmplz-link cmplz-manage-vendors tcf cookie-statement" href="https://neptune.ai/contact-us#cmplz-tcf-wrapper" data-relative_url="#cmplz-tcf-wrapper">Manage vendors</a>
+		<a class="cmplz-link cmplz-external cmplz-read-more-purposes tcf" target="_blank" rel="noopener noreferrer nofollow" href="https://cookiedatabase.org/tcf/purposes/">Read more about these purposes</a>
+			</div>
+
+	<div class="cmplz-divider cmplz-footer"></div>
+
+	<div class="cmplz-buttons">
+		<button class="cmplz-btn cmplz-accept">Ok, I get it</button>
+		<button class="cmplz-btn cmplz-deny">Deny</button>
+		<button class="cmplz-btn cmplz-view-preferences">View preferences</button>
+		<button class="cmplz-btn cmplz-save-preferences">Save preferences</button>
+		<a class="cmplz-btn cmplz-manage-options tcf cookie-statement" href="https://neptune.ai/contact-us#cmplz-manage-consent-container" data-relative_url="#cmplz-manage-consent-container">View preferences</a>
+			</div>
+
+	<div class="cmplz-links cmplz-documents">
+		<a class="cmplz-link cookie-statement" href="https://neptune.ai/contact-us" data-relative_url="">Contact</a>
+		<a class="cmplz-link privacy-statement" href="https://neptune.ai/contact-us" data-relative_url="">Contact</a>
+		<a class="cmplz-link impressum cmplz-hidden" href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" data-relative_url="">{title}</a>
+			</div>
+
+</div>
+</div>
+
+                <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZNL966"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <header class="js-page-header page-header page-header--blog animation animation--done">
+
+    
+<a href="https://app.neptune.ai/o/showcase/org/onboarding-project/runs/table?viewId=98f66b32-2279-4b73-8210-863021c440ac&amp;product_tour_id=444083" target="_blank" rel="nofollow noopener noreferrer" class="js-c-top-navbar-banner c-top-navbar-banner c-top-navbar-banner--normal c-top-navbar-banner--fixed c-top-navbar-banner--off">
+
+<p><strong>Play with a live Neptune project</strong> -&gt; Take a tour 📈</p>
+
+<button class="js-c-top-navbar-banner__button-close c-top-navbar-banner__button-close" aria-label="Close Navigation Bar">
+    <img class=" lazyloaded" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-cancel.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-cancel.svg" width="10" height="10" alt="">
+</button>
+
+</a>
+
+    <div class="l-container page-header__inner">
+        
+        <a href="https://neptune.ai/" title="neptune.ai">
+
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/logo-neptune.svg" width="135" height="32" class="page-header__logo-image" alt="Neptune logo">
+                    </a>
+
+        <div class="page-header__menus js-c-menu">
+                        <nav class="page-header__nav-primary js-nav-el" aria-label="Main" itemscope="" itemtype="https://schema.org/SiteNavigationElement" id="top-nav-primary">
+                <ul id="menu-top-menu" class="c-menu"><li class="c-menu-item--hug js-menu-hug-rwd c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children c-menu-item--fullwidth" data-depth="0" data-id="124" data-rwd="1640"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Product<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="125"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/star.svg" width="16" height="16" class="lazyload c-link__icon" alt="Menu icon">Overview</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="27101"><a href="https://neptune.ai/demo" class="c-link">Product demo</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="22043"><a href="https://neptune.ai/product/deployment-options" class="c-link">Deployment options</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="21994"><a href="https://security.neptune.ai/" class="c-link">Security</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="129"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/bulb.svg" width="16" height="16" class="lazyload c-link__icon" alt="Menu icon">Solutions</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="24366"><a href="https://neptune.ai/product/ml-platform" class="c-link">ML Platform Engineer</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="554"><a href="https://neptune.ai/product/experiment-tracking" class="c-link">Data Scientist</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="683"><a href="https://neptune.ai/product/model-registry" class="c-link">ML Engineer</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="13958"><a href="https://neptune.ai/product/ml-team-lead" class="c-link">ML Team Lead</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="10553"><a href="https://neptune.ai/researchers" class="c-link">Researchers &amp; Kagglers</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="20816"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/gauge.svg" width="16" height="16" class="lazyload c-link__icon" alt="Menu icon">Use cases</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="130"><a href="https://neptune.ai/resources/computer-vision-example" class="c-link">Computer vision</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="23507"><a href="https://neptune.ai/resources/text-classification-example" class="c-link">NLP</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="133"><a href="https://neptune.ai/resources/reinforcement-learning-example" class="c-link">Reinforcement learning</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="131"><a href="https://neptune.ai/resources/tabular-data-example" class="c-link">Tabular data</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="132"><a href="https://neptune.ai/resources/time-series-forecasting-example" class="c-link">Time series</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="139"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/compare-1.svg" width="16" height="16" class="lazyload c-link__icon" alt="Menu icon">Compare</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-compare" data-depth="2" data-id="9550"><a href="https://neptune.ai/vs/wandb" class="c-link">Neptune vs WandB</a></li><li class="menu-item menu-item-type-post_type menu-item-object-compare" data-depth="2" data-id="1427"><a href="https://neptune.ai/vs/mlflow" class="c-link">Neptune vs MLflow</a></li><li class="menu-item menu-item-type-post_type menu-item-object-compare" data-depth="2" data-id="1471"><a href="https://neptune.ai/vs/tensorboard" class="c-link">Neptune vs TensorBoard</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="1481"><a href="https://neptune.ai/vs" class="c-link">Other comparisons</a></li></ul></li></ul><a class="c-menu-article c-menu-article--main c-menu-article--img-main" href="https://neptune.ai/product/deployment-options"><div class="c-menu-article-image">
+            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/08/Deployment-options.jpg?fit=420%2C240&amp;ssl=1" width="420" height="240" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-details"><div class="c-menu-article-content"><h4 class="c-menu-article-content__title"><span>Learn more:</span> SaaS or On-prem?</h4><div class="c-menu-article-content__desc">Choose the deployment option that meets your needs</div></div><div class="c-menu-article-arrow">
+            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+        </div></div></a></div><div class="sub-menu-col sub-menu-col--articles"><div class="c-menu-articles"><a class="c-menu-article c-menu-article--v2 c-menu-article--img-v2" href="https://neptune.ai/customers/brainly"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/06/Brainly_square.png?fit=672%2C673&amp;ssl=1" width="672" height="673" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Case study</span><h4 class="c-menu-article-content__title">Brainly</h4><div class="c-menu-article-content__desc">Tracking Metadata from SageMaker Pipelines in an EdTech Startup</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a><a class="c-menu-article c-menu-article--v2 c-menu-article--img-v2" href="https://neptune.ai/customers/waabi"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/03/waabi-620374634-e1678832510916.jpeg?fit=75%2C75&amp;ssl=1" width="75" height="75" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Case study</span><h4 class="c-menu-article-content__title">Waabi </h4><div class="c-menu-article-content__desc">Gaining Visibility Across the Organization When Training Systems for Self-Driving Vehicles</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a><a class="c-menu-article c-menu-article--v2 c-menu-article--img-v2" href="https://neptune.ai/customers/respo-vision"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/06/Respo_square.svg" width="1" height="1" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Case study</span><h4 class="c-menu-article-content__title">ReSpo.Vision</h4><div class="c-menu-article-content__desc">Tracking and Managing Training Pipelines for Sports Data Analysis</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a></div><div class="c-menu-cta"><a class="c-button c-button--micro c-button--tertiary" href="https://neptune.ai/customers"><span class="c-button__text">See all case studies</span>
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="lazyload c-button__arrow" alt="chevron"></a></div></div></div></li><li class="c-menu-item--hug c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="144"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Developers<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="157"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Menu Item</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="145"><a target="_blank" rel="noopener" href="https://docs.neptune.ai/" class="c-link">Documentation</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="10288"><a target="_blank" rel="noopener" href="https://docs.neptune.ai/usage/quickstart/" class="c-link">Quickstart</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="146"><a target="_blank" rel="noopener" href="https://docs.neptune.ai/integrations/" class="c-link">Integrations</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="147"><a target="_blank" rel="noopener" href="https://github.com/neptune-ai/examples" class="c-link">Code examples</a></li></ul></li></ul></div></div></li><li class="c-menu-item--hug js-menu-hug-rwd c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children c-menu-item--fullwidth" data-depth="0" data-id="134" data-rwd="1526"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Resources<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="20817"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/test-tube.svg" width="16" height="16" class="lazyload c-link__icon" alt="Menu icon">Use Neptune</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="135"><a href="https://neptune.ai/resources?ct=case-study" class="c-link">Case studies</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="136"><a href="https://neptune.ai/resources?ct=example-project" class="c-link">Example projects</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="138"><a href="https://neptune.ai/resources?ct=video" class="c-link">Videos</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="10287"><a href="https://neptune.ai/resources" class="c-link">All resources</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="22757"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/file.svg" width="16" height="16" class="lazyload c-link__icon" alt="Menu icon">Learn MLOps</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent" data-depth="2" data-id="1058"><a href="https://neptune.ai/blog" class="c-link">MLOps Blog</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="21303"><a href="https://neptune.ai/ml-platform-podcast" class="c-link">ML Platform Podcast</a></li></ul></li></ul></div><div class="sub-menu-col sub-menu-col--articles"><div class="c-menu-articles"><a class="c-menu-article c-menu-article--v1 c-menu-article--img-v1" href="https://neptune.ai/blog/ml-platform-guide" target="_blank" rel="nofollow noopener noreferrer"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/03/ML-Platform-Users-Structure.jpg?fit=768%2C402&amp;ssl=1" width="768" height="402" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Article</span><h4 class="c-menu-article-content__title">Building a Machine Learning Platform</h4><div class="c-menu-article-content__desc">A comprehensive guide created as a result of conversations with platform engineers and public resources from platform teams.</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a><a class="c-menu-article c-menu-article--v1 c-menu-article--img-v1" href="https://www.youtube.com/watch?v=W-iQoQpgwG4&amp;list=PLKePQLVx9tOfKFbg9GY2Anl41Be4T1-m5&amp;ab_channel=neptune_ai" target="_blank" rel="nofollow noopener noreferrer"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/08/Podcast-episode-2.jpg?fit=768%2C432&amp;ssl=1" width="768" height="432" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Podcast</span><h4 class="c-menu-article-content__title">Learnings From Building the ML Platform at Mailchimp</h4><div class="c-menu-article-content__desc">Latest episode of the ML Platform Podcast, with Mikiko Bazeley, Head of MLOps at Featureform </div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a></div></div></div></li><li class="c-menu-item--hug menu-item menu-item-type-post_type menu-item-object-page" data-depth="0" data-id="976"><a href="https://neptune.ai/pricing" class="c-link c-link--parent">Pricing</a></li><li class="c-menu-item--hug menu-item menu-item-type-post_type menu-item-object-page" data-depth="0" data-id="15148"><a href="https://neptune.ai/product/enterprise" class="c-link c-link--parent">Enterprise</a></li><li class="c-menu-item--hug c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="148"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Company<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="12705"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Menu Item</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="702"><a href="https://neptune.ai/about-us" class="c-link">About us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="953"><a href="https://neptune.ai/customers" class="c-link">Customers</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="728"><a href="https://neptune.ai/jobs" class="c-link">Careers</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="10289"><a href="https://neptune.ai/about-us/#press" class="c-link">In the news</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="20010"><a href="https://security.neptune.ai/" class="c-link">Security</a></li></ul></li></ul></div></div></li></ul>            </nav>
+        </div>
+
+                <div class="page-header__buttons">
+                        
+            <a href="https://app.neptune.ai/login" target="_blank" rel="nofollow noopener noreferrer" class="c-button c-button--tertiary            c-button--small">
+            <span class="c-button__text">
+                    Log in                </span>
+        </a>
+
+    
+                
+            <a href="https://app.neptune.ai/register" target="_blank" rel="nofollow noopener noreferrer" class="c-button c-button--primary            c-button--small">
+            <span class="c-button__text">
+                    Sign up                </span>
+        </a>
+
+    
+                
+            <a href="https://neptune.ai/contact-us" class="c-button c-button--secondary            c-button--small">
+            <span class="c-button__text">
+                    Contact us                </span>
+        </a>
+
+    
+        </div>
+
+    <button class="js-page-header__mobile-menu-button page-header__mobile-menu-button" aria-label="Mobile Menu Button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    </div>
+
+                            <div class="page-header__top-sub-navbar c-top-sub-navbar">
+        <div class="c-top-sub-navbar__inner l-container">
+
+                            <div class="c-top-sub-navbar__breadcrumbs c-breadcrumbs"><span><span><a href="https://neptune.ai/"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-breadcrumbs-home.svg" alt="Home" width="14" height="16"></a></span> &gt; <span><a href="https://neptune.ai/blog">Blog</a></span> &gt; <span><a href="https://neptune.ai/blog/category/machine-learning-tools">Machine Learning Tools</a></span></span></div>            
+            <div class="c-top-sub-navbar__menus c-top-sub-navbar__topics js-c-menu">
+                                <nav class="c-top-sub-navbar__nav-secondary" aria-label="Main" itemscope="" itemtype="https://schema.org/SiteNavigationElement" id="top-nav-secondary">
+                    <ul id="menu-menu-top-blog" class="c-menu"><li class="c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="11237"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Topics<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="12013"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Categories</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="9"><a href="https://neptune.ai/blog/category/machine-learning-model-development" class="c-link">ML Model Development</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="11"><a href="https://neptune.ai/blog/category/mlops" class="c-link">MLOps</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent" data-depth="2" data-id="13"><a href="https://neptune.ai/blog/category/machine-learning-tools" class="c-link">Machine Learning Tools</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="23"><a href="https://neptune.ai/blog/category/computer-vision" class="c-link">Computer Vision</a></li></ul></li><li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="17722"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Categories</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="15"><a href="https://neptune.ai/blog/category/natural-language-processing" class="c-link">Natural Language Processing</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="30"><a href="https://neptune.ai/blog/category/reinforcement-learning" class="c-link">Reinforcement Learning</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="32"><a href="https://neptune.ai/blog/category/tabular-data" class="c-link">Tabular Data</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="53"><a href="https://neptune.ai/blog/category/time-series-forecasting" class="c-link">Time Series</a></li></ul></li></ul></div></div></li></ul>                </nav>
+            </div>
+
+                        <div class="c-top-sub-navbar__buttons page-header__buttons">
+                                
+                <a href="https://neptune.ai/blog/ml-platform-guide" target="_blank" rel="nofollow noopener noreferrer" class="c-button c-button--tertiary                c-button--small">
+                <span class="c-button__text">
+
+                    <span class="c-button__text">Guide to building ML platform</span>
+
+                                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="lazyload c-button__arrow" alt="chevron">
+                                    </span>
+            </a>
+
+        
+                </div>
+        
+        <div class="c-top-sub-navbar__searchbar">
+                            <form class="page-header__search-wrapper page-header__search-wrapper--desktop" method="get" action="https://neptune.ai/" data-hs-cf-bound="true">
+                    <label class="page-header__search-label" for="page-header-search-input">
+                        Search in Blog...                    </label>
+
+                    <input id="page-header-search-input" type="text" name="s" value="" class="page-header__search-input fz-input fz-input--small _ar_hide_" placeholder="Search in Blog..." autocomplete="off" _ar_hide_="width:182px;height:36px;margin:0px 8px 0px 16px;position:relative;display:block;">
+                    <input type="hidden" name="stype" value="blog">
+                    <button class="page-header__search-button c-button c-button--primary c-button--small">
+                        <img class="page-header__search-button-icon" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-search.svg" alt="search" width="20" height="20">
+                    </button>
+                </form>
+
+                <div class="page-header__search-wrapper page-header__search-wrapper--mobile">
+                    <button class="js-page-header__search-button page-header__search-button">
+                        <img class="page-header__search-button-icon" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-search.svg" alt="search" width="20" height="20">
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-cancel.svg" width="12" height="12" class="page-header__search-button-icon-close lazyload" alt="cancel">
+                    </button>
+
+                    <div class="js-page-header__search page-header__search">
+                        <label class="page-header__search-label" for="page-header-search-input-2">
+                            Search in Blog...                        </label>
+
+                        <form class="page-header__search-inner" method="get" action="https://neptune.ai/" data-hs-cf-bound="true">
+                            <input id="page-header-search-input-2" type="text" name="s" value="" class="page-header__search-input fz-input fz-input--small _ar_hide_" placeholder="Search in Blog..." autocomplete="off" _ar_hide_="width:0px;height:0px;margin:0px 8px 0px 0px;position:relative;display:block;">
+                            <input type="hidden" name="stype" value="blog">
+                            <button type="submit" class="c-button c-button--primary c-button--small" aria-label="Search">
+                                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-search.svg" width="20" height="20" class="lazyload" alt="search">
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+                    </div>
+
+
+    </div>
+    </div>
+            
+</header>
+
+<div class="mobile-navigation mobile-navigation--blog">
+    <div class="js-page-header__menus page-header__menus page-header__menus inactive" style="margin-top: 148px;">
+        <nav class="page-header__nav-primary" aria-label="Main" itemscope="" itemtype="https://schema.org/SiteNavigationElement" id="top-nav-primary--mobile">
+
+            <div class="js-c-blog-mobile-menu-wrapper c-blog-mobile-menu-wrapper"><div class="c-top-sub-navbar__menus c-top-sub-navbar__topics js-c-menu">
+                                <nav class="c-top-sub-navbar__nav-secondary" aria-label="Main" itemscope="" itemtype="https://schema.org/SiteNavigationElement" id="top-nav-secondary">
+                    <ul id="menu-menu-top-blog" class="c-menu"><li class="c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="11237"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Topics<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="12013"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Categories</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="9"><a href="https://neptune.ai/blog/category/machine-learning-model-development" class="c-link">ML Model Development</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="11"><a href="https://neptune.ai/blog/category/mlops" class="c-link">MLOps</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent" data-depth="2" data-id="13"><a href="https://neptune.ai/blog/category/machine-learning-tools" class="c-link">Machine Learning Tools</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="23"><a href="https://neptune.ai/blog/category/computer-vision" class="c-link">Computer Vision</a></li></ul></li><li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="17722"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Categories</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="15"><a href="https://neptune.ai/blog/category/natural-language-processing" class="c-link">Natural Language Processing</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="30"><a href="https://neptune.ai/blog/category/reinforcement-learning" class="c-link">Reinforcement Learning</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="32"><a href="https://neptune.ai/blog/category/tabular-data" class="c-link">Tabular Data</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category" data-depth="2" data-id="53"><a href="https://neptune.ai/blog/category/time-series-forecasting" class="c-link">Time Series</a></li></ul></li></ul></div></div></li></ul>                </nav>
+            </div><div class="c-top-sub-navbar__buttons page-header__buttons">
+                                
+                <a href="https://neptune.ai/blog/ml-platform-guide" target="_blank" rel="nofollow noopener noreferrer" class="c-button c-button--tertiary                c-button--small">
+                <span class="c-button__text">
+
+                    <span class="c-button__text">Guide to building ML platform</span>
+
+                                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-button-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="c-button__arrow ls-is-cached lazyloaded" alt="chevron">
+                                    </span>
+            </a>
+
+        
+                </div></div>
+
+            <ul id="menu-top-menu-1" class="c-menu"><li class="c-menu-item--hug js-menu-hug-rwd c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="124" data-rwd="1640"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Product<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="125"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/star.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/star.svg" width="16" height="16" class="c-link__icon lazyloaded" alt="Menu icon">Overview</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="27101"><a href="https://neptune.ai/demo" class="c-link">Product demo</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="22043"><a href="https://neptune.ai/product/deployment-options" class="c-link">Deployment options</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="21994"><a href="https://security.neptune.ai/" class="c-link">Security</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="129"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/bulb.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/bulb.svg" width="16" height="16" class="c-link__icon lazyloaded" alt="Menu icon">Solutions</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="24366"><a href="https://neptune.ai/product/ml-platform" class="c-link">ML Platform Engineer</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="554"><a href="https://neptune.ai/product/experiment-tracking" class="c-link">Data Scientist</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="683"><a href="https://neptune.ai/product/model-registry" class="c-link">ML Engineer</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="13958"><a href="https://neptune.ai/product/ml-team-lead" class="c-link">ML Team Lead</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="10553"><a href="https://neptune.ai/researchers" class="c-link">Researchers &amp; Kagglers</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="20816"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/gauge.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/gauge.svg" width="16" height="16" class="c-link__icon lazyloaded" alt="Menu icon">Use cases</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="130"><a href="https://neptune.ai/resources/computer-vision-example" class="c-link">Computer vision</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="23507"><a href="https://neptune.ai/resources/text-classification-example" class="c-link">NLP</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="133"><a href="https://neptune.ai/resources/reinforcement-learning-example" class="c-link">Reinforcement learning</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="131"><a href="https://neptune.ai/resources/tabular-data-example" class="c-link">Tabular data</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="132"><a href="https://neptune.ai/resources/time-series-forecasting-example" class="c-link">Time series</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="139"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/compare-1.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/compare-1.svg" width="16" height="16" class="c-link__icon lazyloaded" alt="Menu icon">Compare</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-compare" data-depth="2" data-id="9550"><a href="https://neptune.ai/vs/wandb" class="c-link">Neptune vs WandB</a></li><li class="menu-item menu-item-type-post_type menu-item-object-compare" data-depth="2" data-id="1427"><a href="https://neptune.ai/vs/mlflow" class="c-link">Neptune vs MLflow</a></li><li class="menu-item menu-item-type-post_type menu-item-object-compare" data-depth="2" data-id="1471"><a href="https://neptune.ai/vs/tensorboard" class="c-link">Neptune vs TensorBoard</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="1481"><a href="https://neptune.ai/vs" class="c-link">Other comparisons</a></li></ul></li></ul><a class="c-menu-article c-menu-article--main c-menu-article--img-main" href="https://neptune.ai/product/deployment-options"><div class="c-menu-article-image">
+            <img src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/08/Deployment-options.jpg?fit=420%2C240&amp;ssl=1" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/08/Deployment-options.jpg?fit=420%2C240&amp;ssl=1" width="420" height="240" class=" lazyloaded" alt="Menu thumbnail"></div><div class="c-menu-article-details"><div class="c-menu-article-content"><h4 class="c-menu-article-content__title"><span>Learn more:</span> SaaS or On-prem?</h4><div class="c-menu-article-content__desc">Choose the deployment option that meets your needs</div></div><div class="c-menu-article-arrow">
+            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/nav-article-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class=" lazyloaded" alt="chevron">
+        </div></div></a></div><div class="sub-menu-col sub-menu-col--articles"><div class="c-menu-articles"><a class="c-menu-article c-menu-article--v2 c-menu-article--img-v2" href="https://neptune.ai/customers/brainly"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/06/Brainly_square.png?fit=672%2C673&amp;ssl=1" width="672" height="673" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Case study</span><h4 class="c-menu-article-content__title">Brainly</h4><div class="c-menu-article-content__desc">Tracking Metadata from SageMaker Pipelines in an EdTech Startup</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a><a class="c-menu-article c-menu-article--v2 c-menu-article--img-v2" href="https://neptune.ai/customers/waabi"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/03/waabi-620374634-e1678832510916.jpeg?fit=75%2C75&amp;ssl=1" width="75" height="75" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Case study</span><h4 class="c-menu-article-content__title">Waabi </h4><div class="c-menu-article-content__desc">Gaining Visibility Across the Organization When Training Systems for Self-Driving Vehicles</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a><a class="c-menu-article c-menu-article--v2 c-menu-article--img-v2" href="https://neptune.ai/customers/respo-vision"><div class="c-menu-article-image">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/06/Respo_square.svg" width="1" height="1" class="lazyload" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Case study</span><h4 class="c-menu-article-content__title">ReSpo.Vision</h4><div class="c-menu-article-content__desc">Tracking and Managing Training Pipelines for Sports Data Analysis</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class="lazyload" alt="chevron">
+            </div></a></div><div class="c-menu-cta"><a class="c-button c-button--micro c-button--tertiary" href="https://neptune.ai/customers"><span class="c-button__text">See all case studies</span>
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="lazyload c-button__arrow" alt="chevron"></a></div></div></div></li><li class="c-menu-item--hug c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="144"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Developers<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="157"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Menu Item</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="145"><a target="_blank" rel="noopener" href="https://docs.neptune.ai/" class="c-link">Documentation</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="10288"><a target="_blank" rel="noopener" href="https://docs.neptune.ai/usage/quickstart/" class="c-link">Quickstart</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="146"><a target="_blank" rel="noopener" href="https://docs.neptune.ai/integrations/" class="c-link">Integrations</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="147"><a target="_blank" rel="noopener" href="https://github.com/neptune-ai/examples" class="c-link">Code examples</a></li></ul></li></ul></div></div></li><li class="c-menu-item--hug js-menu-hug-rwd c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="134" data-rwd="1526"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Resources<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="20817"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/test-tube.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/test-tube.svg" width="16" height="16" class="c-link__icon lazyloaded" alt="Menu icon">Use Neptune</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="135"><a href="https://neptune.ai/resources?ct=case-study" class="c-link">Case studies</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="136"><a href="https://neptune.ai/resources?ct=example-project" class="c-link">Example projects</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="138"><a href="https://neptune.ai/resources?ct=video" class="c-link">Videos</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="10287"><a href="https://neptune.ai/resources" class="c-link">All resources</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="22757"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link"><img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/file.svg" data-src="https://neptune.ai/wp-content/uploads/2023/08/file.svg" width="16" height="16" class="c-link__icon lazyloaded" alt="Menu icon">Learn MLOps</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent" data-depth="2" data-id="1058"><a href="https://neptune.ai/blog" class="c-link">MLOps Blog</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="21303"><a href="https://neptune.ai/ml-platform-podcast" class="c-link">ML Platform Podcast</a></li></ul></li></ul></div><div class="sub-menu-col sub-menu-col--articles"><div class="c-menu-articles"><a class="c-menu-article c-menu-article--v1 c-menu-article--img-v1" href="https://neptune.ai/blog/ml-platform-guide" target="_blank" rel="nofollow noopener noreferrer"><div class="c-menu-article-image">
+                <img src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/03/ML-Platform-Users-Structure.jpg?fit=768%2C402&amp;ssl=1" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/03/ML-Platform-Users-Structure.jpg?fit=768%2C402&amp;ssl=1" width="768" height="402" class=" lazyloaded" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Article</span><h4 class="c-menu-article-content__title">Building a Machine Learning Platform</h4><div class="c-menu-article-content__desc">A comprehensive guide created as a result of conversations with platform engineers and public resources from platform teams.</div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/nav-article-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class=" lazyloaded" alt="chevron">
+            </div></a><a class="c-menu-article c-menu-article--v1 c-menu-article--img-v1" href="https://www.youtube.com/watch?v=W-iQoQpgwG4&amp;list=PLKePQLVx9tOfKFbg9GY2Anl41Be4T1-m5&amp;ab_channel=neptune_ai" target="_blank" rel="nofollow noopener noreferrer"><div class="c-menu-article-image">
+                <img src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/08/Podcast-episode-2.jpg?fit=768%2C432&amp;ssl=1" data-src="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/08/Podcast-episode-2.jpg?fit=768%2C432&amp;ssl=1" width="768" height="432" class=" lazyloaded" alt="Menu thumbnail"></div><div class="c-menu-article-content"><span class="c-menu-article-content__subtitle">Podcast</span><h4 class="c-menu-article-content__title">Learnings From Building the ML Platform at Mailchimp</h4><div class="c-menu-article-content__desc">Latest episode of the ML Platform Podcast, with Mikiko Bazeley, Head of MLOps at Featureform </div></div><div class="c-menu-article-arrow">
+                <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/nav-article-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/nav-article-arrow-right.svg" width="20" height="20" class=" lazyloaded" alt="chevron">
+            </div></a></div></div></div></li><li class="c-menu-item--hug menu-item menu-item-type-post_type menu-item-object-page" data-depth="0" data-id="976"><a href="https://neptune.ai/pricing" class="c-link c-link--parent">Pricing</a></li><li class="c-menu-item--hug menu-item menu-item-type-post_type menu-item-object-page" data-depth="0" data-id="15148"><a href="https://neptune.ai/product/enterprise" class="c-link c-link--parent">Enterprise</a></li><li class="c-menu-item--hug c-menu-item--parent menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="0" data-id="148"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link c-link--parent">Company<img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-chevron-down-with-margin.svg" alt="" class="c-link__arrow" width="10" height="6"></a><div class="sub-menu"><div class="sub-menu-col">
+<ul class="sub-menu-list">
+<li class="hide-submenu-header menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" data-depth="1" data-id="12705"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#" class="c-link">Menu Item</a>
+	<ul class="sub-menu-list--child">
+<li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="702"><a href="https://neptune.ai/about-us" class="c-link">About us</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="953"><a href="https://neptune.ai/customers" class="c-link">Customers</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page" data-depth="2" data-id="728"><a href="https://neptune.ai/jobs" class="c-link">Careers</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="10289"><a href="https://neptune.ai/about-us/#press" class="c-link">In the news</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom" data-depth="2" data-id="20010"><a href="https://security.neptune.ai/" class="c-link">Security</a></li></ul></li></ul></div></div></li></ul><div class="page-header__buttons page-header__buttons--mobile">
+                        
+            <a href="https://app.neptune.ai/login" target="_blank" rel="nofollow noopener noreferrer" class="c-button c-button--tertiary            c-button--small">
+            <span class="c-button__text">
+                    Log in                </span>
+        </a>
+
+    
+                
+            <a href="https://app.neptune.ai/register" target="_blank" rel="nofollow noopener noreferrer" class="c-button c-button--primary            c-button--small">
+            <span class="c-button__text">
+                    Sign up                </span>
+        </a>
+
+    
+                
+            <a href="https://neptune.ai/contact-us" class="c-button c-button--secondary            c-button--small">
+            <span class="c-button__text">
+                    Contact us                </span>
+        </a>
+
+    
+        </div>        </nav>
+    </div>
+
+    <div class="js-page-header__overlay mobile-navigation__overlay"></div>
+</div>
+    <!-- main -->
+    <main class="page-main">
+
+        <!-- loop-item -->
+
+<article class="single-post">
+
+    <header class="block-hero block-hero--regular">
+        <div class="l-container c-wrapper l-grid">
+            <div class="c-wrapper__content">
+
+                                    <span class="block-eyebrow block-eyebrow--center clr-indygo-60 l-padding__top--0 l-padding__bottom--micro animation a-fade-in-up animation--done" data-animation-duration=".6s" data-animation-delay=".2s" data-animation-distance=".5rem">
+                        <span class="block-eyebrow__text">
+                            <a href="https://neptune.ai/blog">MLOps Blog</a>                        </span>
+                    </span>
+                
+                <h1 class="block-header block-header--center l-padding__top--0 l-padding__bottom--standard block-header--big animation a-fade-in-up animation--done" style="max-width: 35ch;" data-animation-duration=".6s" data-animation-delay=".6s" data-animation-distance=".5rem">
+                    Installing TensorFlow 2 GPU [Step-by-Step Guide]                </h1>
+
+                <div class="block-hero__meta animation a-fade-in-up animation--done" data-animation-duration=".6s" data-animation-delay=".8s" data-animation-distance=".5rem">
+
+
+                    
+                                            <div class="c-meta">
+                            <a class="c-button c-button--tertiary c-button--regular c-button--author-link" href="https://neptune.ai/blog/author/harshil-patel">
+                                                                    <img src="https://i0.wp.com/neptune.ai/wp-content/uploads/2022/11/Harshil-Patel.png?fit=800%2C800&amp;ssl=1" width="24" height="24" class="c-button__icon" alt="Author image">
+                                                                <span class="c-button__text">
+                                    Harshil Patel                                </span>
+                            </a>
+                        </div>
+                    
+                    <div class="c-meta">
+                        <img class="c-meta__icon" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-meta-time.svg" width="20" height="20" alt="">
+
+                        <span class="c-meta__text">
+                            6 min                        </span>
+                    </div>
+
+                    <div class="c-meta">
+                        <img class="c-meta__icon" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-meta-date.svg" width="18" height="18" alt="">
+
+                        <span class="c-meta__text">
+                            10th August, 2023                        </span>
+                    </div>
+
+                </div>
+
+                                                    <div class="c-categories c-categories--clickable animation a-fade-in-up animation--done" data-animation-duration=".6s" data-animation-delay="1s" data-animation-distance=".5rem">
+                        <a class="c-category c-category--neutral" href="https://neptune.ai/blog/category/machine-learning-tools">Machine Learning Tools</a>                    </div>
+                
+            </div>
+
+            <div class="block-hero__background">
+                <img class="block-hero__background-stars" src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 3 2&#39;%3E%3C/svg%3E" srcset="
+                        https://neptune.ai/wp-content/themes/neptune/img/blocks/hero/hero-stars--414w.png 414w,
+                        https://neptune.ai/wp-content/themes/neptune/img/blocks/hero/hero-stars--768w.png 768w,
+                        https://neptune.ai/wp-content/themes/neptune/img/blocks/hero/hero-stars--1440w.png 1440w" width="1440" height="700" alt="" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+            </div>
+        </div>
+        <div class="block-hero__background-haze" style="opacity: 1;"></div>
+    </header>
+
+   <div class="l-container l-container--main">
+        <div class="l-content content-wrapper js-content">
+            
+<p><a href="https://www.tensorflow.org/" target="_blank" rel="noreferrer noopener nofollow">Tensorflow</a> is one of the most-used deep-learning frameworks. It’s arguably the most popular machine learning platform on the web, with a broad range of users from those just starting out, to people looking for an edge in their careers and businesses.&nbsp;</p>
+
+
+
+<p>Not all users know that you can install the TensorFlow GPU if your hardware supports it. We’ll discuss what Tensorflow is, how it’s used in today’s world, and how to install the latest TensorFlow version with CUDA, cudNN, and GPU support in Windows, Mac, and Linux.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-introduction-to-tensorflow">Introduction to TensorFlow</h2>
+
+
+
+<p>TensorFlow is an open-source software library for machine learning, created by Google. It was initially released on November 28, 2015, and it’s now used across many fields including research in the sciences and engineering.</p>
+
+
+
+<p>The idea behind TensorFlow is to make it quick and simple to train deep neural networks that use a diversity of mathematical models. These networks are then able to learn from data without human intervention or supervision, making them more efficient than conventional methods. The library also offers support for processing on multiple machines simultaneously with different operating systems and GPUs.</p>
+
+
+
+<section id="blog-intext-cta-block_a821f05e7deb1ea65f25bd299dc085d3" class="block-blog-intext-cta  c-box c-box--default c-box--dark c-box--no-hover c-box--standard ">
+
+            <h3 class="block-blog-intext-cta__header">Read also </h3>
+    
+            <p><a href="https://neptune.ai/blog/keep-track-of-tensorflow-keras-model-development-with-neptune" target="_blank" rel="noopener">How to Keep Track of TensorFlow/Keras Model Development with Neptune</a></p>
+<p><a href="https://neptune.ai/blog/debug-and-visualize-tensorflow-keras-model" target="_blank" rel="noopener">Debug and Visualize Your TensorFlow/Keras Model: Hands-on Guide</a></p>
+    
+    </section>
+
+
+
+<h2 class="wp-block-heading" id="h-tensorflow-applications">TensorFlow applications&nbsp;</h2>
+
+
+
+<p>TensorFlow is a library for deep learning built by Google, it’s been gaining a lot of traction ever since its introduction early last year. The main features include automatic differentiation, convolutional neural networks (CNN), and recurrent neural networks (RNN). It’s written in C++ and Python, for high performance it uses a server called a “Cloud TensorFlow” that runs on Google Cloud Platform. It doesn’t require a GPU, which is one of its main features.</p>
+
+
+
+<p>The newest release of Tensorflow also supports data visualization through matplotlib. This visualization library is very popular, and it’s often used in data science coursework, as well as by artists and engineers to do data visualizations using MATLAB or Python / R / etc.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-installing-the-latest-tensorflow-version-with-cuda-cudnn-and-gpu-support">Installing the latest TensorFlow version with CUDA, cudNN, and GPU support</h2>
+
+
+
+<p>Let’s see how to install the latest TensorFlow version on Windows, macOS, and Linux. </p>
+
+
+
+<h2 class="wp-block-heading" id="h-windows">Windows&nbsp;</h2>
+
+
+
+<h3 class="wp-block-heading" id="windows-prerequisite">Prerequisite</h3>
+
+
+
+<ul>
+<li>Python 3.6–3.8</li>
+
+
+
+<li>Windows 7 or later (with <a href="https://support.microsoft.com/help/2977003/the-latest-supported-visual-c-downloads" target="_blank" rel="noreferrer noopener nofollow">C++ redistributable</a>)</li>
+
+
+
+<li>Check <a href="https://www.tensorflow.org/install/source#gpu" target="_blank" rel="noreferrer noopener nofollow">https://www.tensorflow.org/install/so…</a> For latest version information</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading" id="windows-steps">Steps&nbsp;</h3>
+
+
+
+<p><strong>1) Download Microsoft Visual Studio from:</strong></p>
+
+
+
+<p><a href="https://visualstudio.microsoft.com/vs..." target="_blank" rel="noreferrer noopener nofollow">https://visualstudio.microsoft.com/vs…</a></p>
+
+
+
+<p><strong>2) Install the NVIDIA CUDA Toolkit </strong>(<a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noreferrer noopener nofollow">https://developer.nvidia.com/cuda-too…</a>), check the version of software and hardware requirements, we’ll be using :&nbsp;</p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td><strong>Version</strong></td><td><strong>Python version</strong></td><td><strong>Compiler</strong></td><td><strong>Build tools</strong></td><td><strong>cuDNN</strong></td><td><strong>CUDA</strong></td></tr><tr><td>tensorflow-2.5.0</td><td>3.6-3.9</td><td>GCC 7.3.1</td><td>Bazel 3.7.2</td><td>8.1</td><td>11.2</td></tr></tbody></table></figure>
+
+
+
+<p>We will install CUDA version 11.2, but make sure you install the latest or updated version (for example – 11.2.2 if it’s available).</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tf2.PNG" alt=""></figure>
+
+
+
+<p>Click on the newest version and a screen will pop up, where you can choose from a few options, so follow the below image and choose these options for Windows.</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tfnw.PNG" alt=""></figure>
+
+
+
+<p>Once you choose the above options, wait for the download to complete.&nbsp;</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tf4.PNG" alt=""></figure>
+
+
+
+<p>Install it with the Express (Recommended) option, it will take a while to install on your machine.&nbsp;</p>
+
+
+
+<p>3) <strong>Now we’ll download NVIDIA cuDNN, </strong><a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noreferrer noopener nofollow"><strong>https://developer.nvidia.com/cudnn</strong></a></p>
+
+
+
+<p>Check the version code from the TensorFlow site.</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tf6.PNG" alt=""></figure>
+
+
+
+<p>Now, check versions for CUDA and cuDNN, and click download for your operating system. If you can’t find your desired version, click on cuDNN Archive and download from there.&nbsp;</p>
+
+
+
+<p>Once the download is complete, extract the files. </p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tf7.PNG" alt=""></figure>
+
+
+
+<p>Now, copy these 3 folders (bin, include, lib). Go to C Drive&gt;Program Files, and search for NVIDIA GPU Computing Toolkit.</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tf8.PNG" alt=""></figure>
+
+
+
+<p>Open the folder, select CUDA &gt; Version Name, and replace (paste) those copied files.&nbsp;</p>
+
+
+
+<p>Now click on the bin folder and copy the path. It should look like this: <strong>C:Program FilesNVIDIA GPU Computing ToolkitCUDAv11.2bin.&nbsp;</strong></p>
+
+
+
+<p>On your PC, search for Environment variables, as shown below.</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0.png" alt=""></figure>
+
+
+
+<p>Click on <strong>Environment Variables</strong> on the bottom left. Now click on the link which states <strong>PATH</strong>.</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(1).png" alt=""></figure>
+
+
+
+<p>Once you click on the PATH, you will see something like this.&nbsp;</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tf11.PNG" alt=""></figure>
+
+
+
+<p>Now click on <strong>New (Top Left), and paste the bin path here. Go to the CUDA folder, select libnvvm folder, and copy its path. </strong>Follow the same process and paste that path into the system path. Next, just restart your PC. </p>
+
+
+
+<p>4)<strong> Installing Tensorflow</strong></p>
+
+
+
+<p>Open conda prompt. If not installed, get it here → <a href="https://www.anaconda.com/products/individual" target="_blank" rel="noreferrer noopener nofollow">https://www.anaconda.com/products/individual</a>.</p>
+
+
+
+<p>Now copy the below commands and paste them into the prompt (Check for the versions).</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda create --name tf2<span class="hljs-number" style="color: teal;">.5</span> python==<span class="hljs-number" style="color: teal;">3.8</span></pre>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda activate tf2<span class="hljs-number" style="color: teal;">.5</span> (version)</pre>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">pip install tensorflow (With GPU Support) //Install TensorFlow GPU command, pip install --upgrade tensorflow-gpu</pre>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(2).png" alt=""></figure>
+
+
+
+<p>You’ll see an installation screen like this.&nbsp; If you see any errors, Make sure you’re using the correct version and don’t miss any steps.</p>
+
+
+
+<p>We’ve installed everything, so let’s test it out in Pycharm.&nbsp;</p>
+
+
+
+<h3 class="wp-block-heading" id="windows-test">Test&nbsp;</h3>
+
+
+
+<p>To test the whole process we’ll use Pycharm. If not installed, get the community edition → <a href="https://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noreferrer noopener nofollow">https://www.jetbrains.com/pycharm/download/#section=windows</a>.</p>
+
+
+
+<p>First, to check if TensorFlow GPU has been installed properly on your machine, run the below code:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);"><span class="hljs-comment" style="color: rgb(153, 153, 136); font-style: italic;"># importing the tensorflow package</span>
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> tensorflow <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> tf
+tf.test.is_built_with_cuda()
+tf.test.is_gpu_available(cuda_only=<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">False</span>, min_cuda_compute_capability=<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">None</span>)</pre>
+
+
+
+<p>It should show TRUE as output. If it’s FALSE or some error, look at the steps.&nbsp;</p>
+
+
+
+<p>Now let’s run some code.&nbsp;</p>
+
+
+
+<p>For a simple demo, we train it on the MNIST dataset of handwritten digits. We’ll see through how to create the network as well as initialize a loss function, check accuracy, and more.</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(3).png" alt=""></figure>
+
+
+
+<p>Configure the env, create a new Python file, and paste the below code:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);"><span class="hljs-comment" style="color: rgb(153, 153, 136); font-style: italic;"># Imports</span>
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> torch
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> torchvision
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> torch.nn.functional <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> F
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> torchvision.datasets <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> datasets
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> torchvision.transforms <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> transforms
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">from</span> torch <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> optim
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">from</span> torch <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> nn
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">from</span> torch.utils.data <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> DataLoader
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">from</span> tqdm <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> tqdm</pre>
+
+
+
+<p>Check the rest of the code here -&gt; <a href="https://github.com/aladdinpersson/Machine-Learning-Collection/blob/master/ML/Pytorch/Basics/pytorch_simple_CNN.py" target="_blank" rel="noreferrer noopener nofollow">https://github.com/aladdinpersson/Machine-Learning-Collection/blob/master/ML/Pytorch/Basics/pytorch_simple_CNN.py</a>.</p>
+
+
+
+<p>When you run the code, look for <strong><em>successfully opened cuda(versioncode).</em></strong></p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(4).png" alt=""></figure>
+
+
+
+<p><strong>Once the training started, all the steps were successful!</strong></p>
+
+
+
+<h2 class="wp-block-heading" id="h-macos">MacOS</h2>
+
+
+
+<p>MacOS doesn’t support Nvidia GPU for the latest versions, so this will be a CPU-only installation. You can get GPU support on a Mac with some extra effort and requirements.&nbsp;</p>
+
+
+
+<h3 class="wp-block-heading" id="macos-prerequisite">Prerequisite&nbsp;</h3>
+
+
+
+<ul>
+<li>Python 3.6–3.8</li>
+
+
+
+<li>macOS 10.12.6 (Sierra) or later (no GPU support)</li>
+
+
+
+<li>Check <a href="https://www.tensorflow.org/install/source#gpu" target="_blank" rel="noreferrer noopener nofollow">https://www.tensorflow.org/install/so…</a> For the latest version information</li>
+</ul>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(5).png" alt=""></figure>
+
+
+
+<p>You can install the latest version available on the site, but for this tutorial, we’ll be using Python 3.8. Also, check with the TensorFlow site for version support.&nbsp;</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(6).png" alt=""></figure>
+
+
+
+<p><strong>2) Prepare environment:</strong></p>
+
+
+
+<p>After installing Miniconda, open the command prompt.</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda install -y jupyter</pre>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(7).png" alt=""></figure>
+
+
+
+<p>This will take some time to install jupyter. Next, install the Mac <a href="https://raw.githubusercontent.com/jeffheaton/t81_558_deep_learning/master/tensorflow.yml" target="_blank" rel="noreferrer noopener nofollow">tensorflow.yml</a> file. You can also create a .yml file to install TensorFlow and dependencies (mentioned below).</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">dependencies:
+    - python=<span class="hljs-number" style="color: teal;">3.8</span>
+    - pip&gt;=<span class="hljs-number" style="color: teal;">19.0</span>
+    - jupyter
+    - scikit-learn
+    - scipy
+    - pandas
+    - pandas-datareader
+    - matplotlib
+    - pillow
+    - tqdm
+    - requests
+    - h5py
+    - pyyaml
+    - flask
+    - boto3
+    - pip:
+        - tensorflow==<span class="hljs-number" style="color: teal;">2.4</span>
+        - bayesian-optimization
+        - gym
+        - kaggle</pre>
+
+
+
+<p>Run the following command from the same directory that contains <strong>tensorflow.yml</strong>.&nbsp;</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda env create -f tensorflow.yml -n tensorflow</pre>
+
+
+
+<p>This installation might take a few minutes.&nbsp;</p>
+
+
+
+<p>Activate the environment using the following command:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">python -m ipykernel install --user --name tensorflow --display-name <span class="hljs-string" style="color: rgb(221, 17, 68);">"Python 3.8 (tensorflow)"</span></pre>
+
+
+
+<h3 class="wp-block-heading" id="macos-test">Test&nbsp;</h3>
+
+
+
+<p>To test the whole process, we’ll use a Jupyter notebook. Use this command to start Jupyter:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">jupyter notebook</pre>
+
+
+
+<p>Cope the below code and run on jupyter notebook.</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);"><span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> sys
+
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> tensorflow.keras
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> pandas <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> pd
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> sklearn <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> sk
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> tensorflow <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> tf
+
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Tensor Flow Version: {tf.__version__}"</span>)
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Keras Version: {tensorflow.keras.__version__}"</span>)
+print()
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Python {sys.version}"</span>)
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Pandas {pd.__version__}"</span>)
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Scikit-Learn {sk.__version__}"</span>)
+gpu = len(tf.config.list_physical_devices(<span class="hljs-string" style="color: rgb(221, 17, 68);">'GPU'</span>))&gt;<span class="hljs-number" style="color: teal;">0</span>
+print(<span class="hljs-string" style="color: rgb(221, 17, 68);">"GPU is"</span>, <span class="hljs-string" style="color: rgb(221, 17, 68);">"available"</span> <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">if</span> gpu <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">else</span> <span class="hljs-string" style="color: rgb(221, 17, 68);">"NOT AVAILABLE"</span>)</pre>
+
+
+
+<p>This might take some time, but you’ll see something like this with your installed versions.</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(8).png" alt=""></figure>
+
+
+
+<h2 class="wp-block-heading" id="h-linux">Linux&nbsp;</h2>
+
+
+
+<p>We can install both CPU and GPU versions on Linux.&nbsp;</p>
+
+
+
+<h3 class="wp-block-heading" id="linux-prerequisite">Prerequisite&nbsp;</h3>
+
+
+
+<ul>
+<li>Python 3.6–3.8</li>
+
+
+
+<li>Ubuntu 16.04 or later</li>
+
+
+
+<li>Check <a href="https://www.tensorflow.org/install/source#gpu" target="_blank" rel="noreferrer noopener nofollow">https://www.tensorflow.org/install/so…</a> for the latest version information</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading" id="linux-steps">Steps&nbsp;</h3>
+
+
+
+<p><strong>1) First download and install Miniconda from </strong><a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noreferrer noopener nofollow"><strong>https://docs.conda.io/en/latest/miniconda.html</strong></a></p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(9).png" alt=""></figure>
+
+
+
+<p><strong>2) To install CUDA on your machine, you will need:</strong></p>
+
+
+
+<ul>
+<li>CUDA capable GPU,</li>
+
+
+
+<li>A supported version of Linux,</li>
+
+
+
+<li>NVIDIA CUDA Toolkit (<a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noreferrer noopener nofollow">https://developer.nvidia.com/cuda-downloads</a>).</li>
+</ul>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(10).png" alt=""></figure>
+
+
+
+<p>You can install CUDA by running,</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">$ sudo apt install nvidia-cuda-toolkit</pre>
+
+
+
+<p>After installing CUDA, run to verify the install:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">nvcc -V</pre>
+
+
+
+<p>You’ll see it output something like this:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) <span class="hljs-number" style="color: teal;">2005</span><span class="hljs-number" style="color: teal;">-2021</span> NVIDIA Corporation
+Built on Sun_Jul_22_21:<span class="hljs-number" style="color: teal;">07</span>:<span class="hljs-number" style="color: teal;">16</span>_PDT_2019
+Cuda compilation tools, release ‘version’
+</pre>
+
+
+
+<p>3) <strong>Now we’ll download NVIDIA cuDNN, </strong><a href="https://developer.nvidia.com/rdp/form/cudnn-download-survey" target="_blank" rel="noreferrer noopener nofollow"><strong>https://developer.nvidia.com/cudnn</strong></a></p>
+
+
+
+<p>Check the version code from the TensorFlow site.<img decoding="async" fetchpriority="high" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/tf6.PNG" width="624" height="139"></p>
+
+
+
+<p>After downloading, extract the files:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">tar -xvzf cudnn<span class="hljs-number" style="color: teal;">-10.1</span>-linux-x64-<span class="hljs-string" style="color: rgb(221, 17, 68);">'version'</span>.tgz</pre>
+
+
+
+<p>Now, we’ll copy the extracted files to the CUDA installation path:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">sudo cp cuda/include/cudnn.h /usr/lib/cuda/include/
+sudo cp cuda/lib64/libcudnn* /usr/lib/cuda/lib64/</pre>
+
+
+
+<p>Setting up the file permissions of cuDNN:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">$ sudo chmod a+r /usr/lib/cuda/include/cudnn.h /usr/lib/cuda/lib64/libcudnn*</pre>
+
+
+
+<p><strong>4) Get the environment ready:</strong></p>
+
+
+
+<p>Export CUDA environment variables. To set them, run:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">$ echo <span class="hljs-string" style="color: rgb(221, 17, 68);">'export LD_LIBRARY_PATH=/usr/lib/cuda/lib64:$LD_LIBRARY_PATH'</span> &gt;&gt; ~/.bashrc
+$ echo <span class="hljs-string" style="color: rgb(221, 17, 68);">'export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH'</span> &gt;&gt; ~/.bashrc</pre>
+
+
+
+<p>You can also set the environment with conda and jupyter notebook.</p>
+
+
+
+<p>After installing Miniconda, open the command prompt.</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda install -y jupyter</pre>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/pasted image 0(11).png" alt=""></figure>
+
+
+
+<p>Now,&nbsp; check with TensorFlow site for version, and run the below command:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda create --name tensorflow python=<span class="hljs-number" style="color: teal;">3.8</span></pre>
+
+
+
+<p>To enter the environment:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda activate tensorflow</pre>
+
+
+
+<p>Let’s create Jupyter support for your new environment:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda install nb_conda
+</pre>
+
+
+
+<p>This will take some time to get things done.&nbsp;</p>
+
+
+
+<p>To Install CPU only, use the following command:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda install -c anaconda tensorflow</pre>
+
+
+
+<p>To Install both GPU and CPU, use the following command:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda install -c anaconda tensorflow-gpu</pre>
+
+
+
+<p>To add additional libraries, update or create the ymp file in your root location, use:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">conda env update --file tools.yml</pre>
+
+
+
+<p>Below are additional libraries you need to install (you can install them with pip).</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">dependencies:
+    - jupyter
+    - scikit-learn
+    - scipy
+    - pandas
+    - pandas-datareader
+    - matplotlib
+    - pillow
+    - tqdm
+    - requests
+    - h5py
+    - pyyaml
+    - flask
+    - boto3
+    - pip
+    - pip:
+        - bayesian-optimization
+        - gym
+        - kaggle</pre>
+
+
+
+<h3 class="wp-block-heading" id="linux-test">Test&nbsp;</h3>
+
+
+
+<p>There are two ways you can test your GPU.</p>
+
+
+
+<p>First, you can run this command:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);"><span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> tensorflow <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> tf
+tf.config.list_physical_devices(<span class="hljs-string" style="color: rgb(221, 17, 68);">"GPU"</span>)</pre>
+
+
+
+<p>You will see similar output, [PhysicalDevice(name=’/physical_device:GPU:0′, device_type=’GPU’)]</p>
+
+
+
+<p>Second, you can also use a jupyter notebook. Use this command to start Jupyter.</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">jupyter notebook</pre>
+
+
+
+<p>Now, run the below code:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);"><span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> sys
+
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> tensorflow.keras
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> pandas <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> pd
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> sklearn <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> sk
+<span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">import</span> tensorflow <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">as</span> tf
+
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Tensor Flow Version: {tf.__version__}"</span>)
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Keras Version: {tensorflow.keras.__version__}"</span>)
+print()
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Python {sys.version}"</span>)
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Pandas {pd.__version__}"</span>)
+print(f<span class="hljs-string" style="color: rgb(221, 17, 68);">"Scikit-Learn {sk.__version__}"</span>)
+gpu = len(tf.config.list_physical_devices(<span class="hljs-string" style="color: rgb(221, 17, 68);">'GPU'</span>))&gt;<span class="hljs-number" style="color: teal;">0</span>
+print(<span class="hljs-string" style="color: rgb(221, 17, 68);">"GPU is"</span>, <span class="hljs-string" style="color: rgb(221, 17, 68);">"available"</span> <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">if</span> gpu <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">else</span> <span class="hljs-string" style="color: rgb(221, 17, 68);">"NOT AVAILABLE"</span>)</pre>
+
+
+
+<p>You’ll see results something like this:</p>
+
+
+
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(51, 51, 51); background: rgb(248, 248, 248);">TensorFlow Version: <span class="hljs-string" style="color: rgb(221, 17, 68);">'version'</span>
+Keras Version: <span class="hljs-string" style="color: rgb(221, 17, 68);">'version'</span>-tf
+
+Python <span class="hljs-number" style="color: teal;">3.8</span><span class="hljs-number" style="color: teal;">.0</span>
+Pandas <span class="hljs-string" style="color: rgb(221, 17, 68);">'version'</span>
+Scikit-Learn <span class="hljs-string" style="color: rgb(221, 17, 68);">'version'</span>
+GPU <span class="hljs-keyword" style="color: rgb(51, 51, 51); font-weight: 700;">is</span> available</pre>
+
+
+
+<p>So, when you see a GPU is available, you successfully installed TensorFlow on your machine.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-conclusion">Conclusion</h2>
+
+
+
+<p>TensorFlow is a free and open-source software library for machine learning created by Google, and it’s most notably known for its GPU accelerated computation speed. We saw how to install TensorFlow on Windows, Mac, and Linux. I hope that this guide helps you get started with TensorFlow!</p>
+
+
+
+<h3 class="wp-block-heading">References and recommended reading:</h3>
+
+
+
+<ul>
+<li><a href="https://github.com/aladdinpersson/Machine-Learning-Collection/blob/master/ML/Pytorch/Basics/pytorch_simple_CNN.py" target="_blank" rel="noreferrer noopener nofollow">https://github.com/aladdinpersson/Machine-Learning-Collection/blob/master/ML/Pytorch/Basics/pytorch_simple_CNN.py</a></li>
+
+
+
+<li><a href="https://www.youtube.com/watch?v=dj-Jntz-74g" target="_blank" rel="noreferrer noopener nofollow">https://www.youtube.com/watch?v=dj-Jntz-74g</a></li>
+
+
+
+<li><a href="https://github.com/jeffheaton/t81_558_deep_learning/blob/master/install/tensorflow-install-jul-2020.ipynb" target="_blank" rel="noreferrer noopener nofollow">https://github.com/jeffheaton/t81_558_deep_learning/blob/master/install/tensorflow-install-jul-2020.ipynb</a></li>
+
+
+
+<li><a href="https://www.tensorflow.org/guide/gpu" target="_blank" rel="noreferrer noopener nofollow">https://www.tensorflow.org/guide/gpu</a></li>
+
+
+
+<li><a href="https://www.liquidweb.com/kb/how-to-install-tensorflow-on-ubuntu-18-04/" target="_blank" rel="noreferrer noopener nofollow">https://www.liquidweb.com/kb/how-to-install-tensorflow-on-ubuntu-18-04/</a></li>
+
+
+
+<li><a href="https://www.pyimagesearch.com/2019/12/09/how-to-install-tensorflow-2-0-on-macos/" target="_blank" rel="noreferrer noopener nofollow">https://www.pyimagesearch.com/2019/12/09/how-to-install-tensorflow-2-0-on-macos/</a></li>
+
+
+
+<li><a href="https://towardsdatascience.com/installing-tensorflow-gpu-in-ubuntu-20-04-4ee3ca4cb75d" target="_blank" rel="noreferrer noopener nofollow">https://towardsdatascience.com/installing-tensorflow-gpu-in-ubuntu-20-04-4ee3ca4cb75d</a></li>
+</ul>
+
+            <div class="c-i-box">
+
+    <header class="c-header">
+        <img src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 1 1&#39;%3E%3C/svg%3E" data-src="https://neptune.ai/wp-content/themes/neptune/img/blocks/i-box/header-icon.svg" width="24" height="24" class="c-header__icon lazyload" alt="">
+
+        <h3 class="c-header__text"><strong>
+                More about            </strong>
+            Installing TensorFlow 2 GPU [Step-by-Step Guide]        </h3>
+    </header>
+    <h4 class="c-header-2">
+                    Check out our 
+<span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C8.44183 0 8.8 0.358172 8.8 0.8V1.6C8.8 2.04183 8.44183 2.4 8 2.4C7.55817 2.4 7.2 2.04183 7.2 1.6V0.8C7.2 0.358172 7.55817 0 8 0Z" fill="white"></path>
+<path d="M9.6 13.6V14.8C9.6 15.4627 9.06274 16 8.4 16H7.6C6.93726 16 6.4 15.4627 6.4 14.8V13.6H9.6Z" fill="white"></path>
+<path d="M14.4 7.2C13.9582 7.2 13.6 7.55817 13.6 8C13.6 8.44183 13.9582 8.8 14.4 8.8H15.2C15.6418 8.8 16 8.44183 16 8C16 7.55817 15.6418 7.2 15.2 7.2H14.4Z" fill="white"></path>
+<path d="M0 8C0 7.55817 0.358172 7.2 0.8 7.2H1.6C2.04183 7.2 2.4 7.55817 2.4 8C2.4 8.44183 2.04183 8.8 1.6 8.8H0.8C0.358172 8.8 0 8.44183 0 8Z" fill="white"></path>
+<path d="M3.47452 2.34315C3.1621 2.03073 2.65557 2.03073 2.34315 2.34315C2.03073 2.65557 2.03073 3.1621 2.34315 3.47452L2.90883 4.04021C3.22125 4.35263 3.72778 4.35263 4.0402 4.04021C4.35262 3.72779 4.35262 3.22126 4.0402 2.90884L3.47452 2.34315Z" fill="white"></path>
+<path d="M11.9598 4.0402C11.6474 3.72778 11.6474 3.22125 11.9598 2.90883L12.5255 2.34314C12.8379 2.03072 13.3444 2.03072 13.6569 2.34314C13.9693 2.65556 13.9693 3.16209 13.6569 3.47451L13.0912 4.0402C12.7787 4.35262 12.2722 4.35262 11.9598 4.0402Z" fill="white"></path>
+<path d="M10.6144 9.04566C10.1198 9.74514 9.6 10.4995 9.6 11.3563V12H6.4V11.3563C6.4 10.4995 5.88024 9.74514 5.38555 9.04566C5.01672 8.52413 4.8 7.88737 4.8 7.2C4.8 5.43267 6.23269 4 8 4C9.76731 4 11.2 5.43267 11.2 7.2C11.2 7.88737 10.9833 8.52413 10.6144 9.04566Z" fill="white"></path>
+</svg> 
+<strong>product resources</strong></span> 
+and
+<span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.20005 2.5998H13.4V9.7998H12.5V11.5998H13.4C14.3942 11.5998 15.2 10.7939 15.2 9.7998V2.5998C15.2 1.60569 14.3942 0.799805 13.4 0.799805H6.20005C5.20594 0.799805 4.40005 1.60569 4.40005 2.5998V3.4998H6.20005V2.5998ZM2.60005 13.3998L2.60005 6.1998H9.80005V13.3998H2.60005ZM0.800049 6.1998C0.800049 5.20569 1.60594 4.3998 2.60005 4.3998H9.80005C10.7942 4.3998 11.6 5.20569 11.6 6.1998V13.3998C11.6 14.3939 10.7942 15.1998 9.80005 15.1998H2.60005C1.60594 15.1998 0.800049 14.3939 0.800049 13.3998V6.1998Z" fill="white"></path>
+</svg>
+<strong>related articles</strong></span> below:
+            </h4>
+
+
+    <div class="c-i-box-grid">
+                                    
+                <a class="c-i-box-grid-box" href="https://neptune.ai/blog/ml-pipeline-architecture-design-patterns">
+
+                    <span class="c-i-box-grid-box__source">
+                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/ibox-related.svg" width="11" height="11" class="lazyload" alt="">
+                            Related article                                            </span>
+
+                    <h4 class="c-i-box-grid-box__title">
+                        ML Pipeline Architecture Design Patterns (With 10 Real-World Examples)                    </h4>
+                    <span class="c-button c-button--tertiary c-button--small">
+                        <span class="c-button__text">
+                            Read more                        </span>
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="lazyload c-button__arrow" alt="chevron">
+                    </span>
+                </a>
+            
+                <a class="c-i-box-grid-box" href="https://neptune.ai/blog/organizing-ml-monorepo-with-pants">
+
+                    <span class="c-i-box-grid-box__source">
+                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/ibox-related.svg" width="11" height="11" class="lazyload" alt="">
+                            Related article                                            </span>
+
+                    <h4 class="c-i-box-grid-box__title">
+                        Organizing ML Monorepo With Pants                    </h4>
+                    <span class="c-button c-button--tertiary c-button--small">
+                        <span class="c-button__text">
+                            Read more                        </span>
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="lazyload c-button__arrow" alt="chevron">
+                    </span>
+                </a>
+            
+                <a class="c-i-box-grid-box" href="https://neptune.ai/blog/learnings-from-building-ml-platform-at-stitch-fix">
+
+                    <span class="c-i-box-grid-box__source">
+                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/ibox-related.svg" width="11" height="11" class="lazyload" alt="">
+                            Related article                                            </span>
+
+                    <h4 class="c-i-box-grid-box__title">
+                        Learnings From Building the ML Platform at Stitch Fix                    </h4>
+                    <span class="c-button c-button--tertiary c-button--small">
+                        <span class="c-button__text">
+                            Read more                        </span>
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="lazyload c-button__arrow" alt="chevron">
+                    </span>
+                </a>
+            
+                <a class="c-i-box-grid-box" href="https://neptune.ai/blog/deploying-conversational-ai-products-with-jason-flaks">
+
+                    <span class="c-i-box-grid-box__source">
+                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/ibox-related.svg" width="11" height="11" class="lazyload" alt="">
+                            Related article                                            </span>
+
+                    <h4 class="c-i-box-grid-box__title">
+                        Deploying Conversational AI Products to Production&nbsp;With Jason Flaks                    </h4>
+                    <span class="c-button c-button--tertiary c-button--small">
+                        <span class="c-button__text">
+                            Read more                        </span>
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="10" height="10" class="lazyload c-button__arrow" alt="chevron">
+                    </span>
+                </a>
+                    
+        
+    </div>
+
+    <div class="c-i-box-topics">
+                    <h3 class="c-i-box-topics__title">
+                Explore more content topics:            </h3>
+                <div class="c-i-box-tags">
+
+                                        <div class="c-categories c-categories--clickable c-categories--wrap c-categories--align-left">
+                                                                    <a href="https://neptune.ai/blog/category/computer-vision" class="c-category c-category--neutral">
+                            Computer Vision                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/general" class="c-category c-category--neutral">
+                            General                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/machine-learning-tools" class="c-category c-category--neutral">
+                            Machine Learning Tools                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/machine-learning-model-development" class="c-category c-category--neutral">
+                            ML Model Development                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/mlops" class="c-category c-category--neutral">
+                            MLOps                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/natural-language-processing" class="c-category c-category--neutral">
+                            Natural Language Processing                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/reinforcement-learning" class="c-category c-category--neutral">
+                            Reinforcement Learning                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/tabular-data" class="c-category c-category--neutral">
+                            Tabular Data                        </a>
+                                                                    <a href="https://neptune.ai/blog/category/time-series-forecasting" class="c-category c-category--neutral">
+                            Time Series                        </a>
+                                    </div>
+            
+        </div>
+    </div>
+
+</div>        </div>
+        <aside class="l-sidebar sidebar js-sidebar sidebar--overflow">
+            <div class="sidebar__inner js-sidebar-inner" style="max-height: calc(100vh - 148px); top: 168px;">
+                <div class="sidebar__scroll js-sidebar-scroll">
+
+                    <div class="sidebar-panel sidebar-panel--hide-on-md js-sidebar-panel">
+                        <div class="c-filters js-filters c-filters--search-results">
+                            <div class="c-filter c-filter--search js-filter-search">
+    <form class="fz-form c-search-form" method="get" action="https://neptune.ai/" data-hs-cf-bound="true">
+        <input name="s" id="s" type="text" class="fz-input fz-input--small _ar_hide_" placeholder="Search for..." value="" _ar_hide_="width:0px;height:0px;margin:0px 16px 0px 0px;position:relative;display:block;">
+        <input type="hidden" name="stype" value="blog">
+        <button type="submit" class="c-button c-button--primary c-button--small">
+            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-search.svg" width="24" height="24" class="lazyload" alt="search">
+        </button>
+    </form>
+        <span class="c-filter-clear c-filter-clear--hide js-search-filter-clear">
+        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-circle-cancel-blog.svg" width="14" height="14" class="lazyload c-filter-clear__img" alt="arrow-right">
+        Clear current search    </span>
+</div>
+                        </div>
+                    </div>
+                    <div class="sidebar-panel js-sidebar-panel">
+                        <div class="sidebar-content sidebar-content--hidden-on-mobile">
+                           
+<div id="Sidebar_CTA_content" class="block-accordion-simple l-padding__top--0 l-padding__bottom--standard block-accordion-simple--open-on-start block-accordion-simple--expanded">
+
+    <button class="block-accordion-simple__title">
+        <span itemprop="name">About neptune.ai</span>
+
+        <span class="block-accordion-simple__title-arrow">
+            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-arrow-accordion-small.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/blocks/accordion-simple/icon-arrow-accordion-small.svg" width="12" height="7" class="block-accordion-simple__title-arrow-icon lazyloaded" alt="chevron">
+        </span>
+    </button>
+
+    <div class="block-accordion-simple__content" style="max-height: 471px;">
+        
+
+<div id="single-article-left-sidebar__video" class="block-video " style="width: 100%;">
+
+    <div class="js-c-video-player c-video" data-video-url="https://neptune.ai/wp-content/uploads/2023/02/NEPT_EXP_10_14.mp4" data-show-controls="false" data-unmute="true" data-button-icon="https://neptune.ai/wp-content/themes/neptune/img/icon-close.svg">
+
+            <div class="c-video-player__image-placeholder-wrapper c-video-player__image-placeholder-wrapper--transparent-layer">
+
+            
+            <picture>
+
+                                    <source media="(max-width: 480px)" data-srcset="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/04/CV-compare-runs-dashboard.png?fit=480%2C288&amp;ssl=1" srcset="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/04/CV-compare-runs-dashboard.png?fit=480%2C288&amp;ssl=1">
+                
+                                    <source media="(max-width: 768px)" data-srcset="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/04/CV-compare-runs-dashboard.png?fit=768%2C461&amp;ssl=1" srcset="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/04/CV-compare-runs-dashboard.png?fit=768%2C461&amp;ssl=1">
+                
+                <source media="(max-width: 1024px)" srcset="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/04/CV-compare-runs-dashboard.png?fit=1020%2C613&amp;ssl=1">
+
+                <img src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 1390 835&#39;%3E%3C/svg%3E" data-srcset="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/04/CV-compare-runs-dashboard.png?fit=1020%2C613&amp;ssl=1" alt="" width="1020" height="613" style="" class="js-c-video-player__image-placeholder c-video-player__image-placeholder lazyloaded" srcset="https://i0.wp.com/neptune.ai/wp-content/uploads/2023/04/CV-compare-runs-dashboard.png?fit=1020%2C613&amp;ssl=1">
+
+            </picture>
+
+                                                                         <button class="js-c-video-player__button--play c-video-player__button--play c-button c-button--regular c-button--primary c-button--icon  c-video-player__button--play-center">
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-play.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-play.svg" width="24" height="24" class="c-button__icon lazyloaded" alt="">
+                        </button>
+                        
+                                                
+        </div>
+    
+</div>
+
+</div>
+
+
+
+<div id="custom-text-block_1cc87667480c9bc08de4d6e5d5909995" class="block-custom-text  clr-paragraph-color l-padding__top--small l-padding__bottom--micro" style="max-width: 100%; font-size: .875rem; line-height: 20px; font-weight: 400;">
+    
+    Neptune is a tool for experiment tracking and model registry.
+    </div>
+
+
+
+<div id="custom-text-block_b1ed28585a77bb44f300d68a5f539254" class="block-custom-text  clr-paragraph-color l-padding__top--0 l-padding__bottom--0" style="max-width: 100%; font-size: .875rem; line-height: 20px; font-weight: 400;">
+    
+    It allows you to log, organize, compare, register and share all your ML model metadata in a single place.
+    </div>
+
+
+
+<div class="block-buttons-group block-buttons-group--column block-buttons-group--horizontal-left block-buttons-group--vertical-top  l-padding__top--small l-padding__bottom--0">
+    <!--suppress CheckEmptyScriptTag -->
+    
+    <a id="single-article-left-sidebar__neptune-app-tour" class="c-button c-button--tertiary c-button--small" href="https://app.neptune.ai/o/showcase/org/onboarding-project/runs/table?viewId=98f66b32-2279-4b73-8210-863021c440ac&amp;product_tour_id=444083" target="_blank" rel="nofollow noopener noreferrer">
+
+        
+        
+            <span class="c-button__text">
+                Take interactive tour of the Neptune app            </span>
+
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-button-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="12" height="12" alt="" class="c-button__arrow lazyloaded">
+            
+        
+    </a>
+
+
+    <a id="single-article-left-sidebar__see-documentation" class="c-button c-button--tertiary c-button--small" href="https://docs.neptune.ai/">
+
+        
+        
+            <span class="c-button__text">
+                See Docs            </span>
+
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-button-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="12" height="12" alt="" class="c-button__arrow lazyloaded">
+            
+        
+    </a>
+
+
+    <a id="single-article-left-sidebar__explore-resources" class="c-button c-button--tertiary c-button--small" href="https://neptune.ai/resources">
+
+        
+        
+            <span class="c-button__text">
+                Explore resources            </span>
+
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-button-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="12" height="12" alt="" class="c-button__arrow lazyloaded">
+            
+        
+    </a>
+
+
+    <a id="single-article-left-sidebar__check-pricing" class="c-button c-button--tertiary c-button--small" href="https://neptune.ai/pricing">
+
+        
+        
+            <span class="c-button__text">
+                Check pricing            </span>
+
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/icon-button-arrow-right.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="12" height="12" alt="" class="c-button__arrow lazyloaded">
+            
+        
+    </a>
+
+
+</div>
+
+
+    </div>
+</div>
+                        </div>
+                    </div>
+                    <div class="sidebar-header sidebar-header--visible js-sidebar-toggle">
+                        <div class="sidebar-header__label">Table of contents</div>
+                        <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-chevron-down-small.svg" width="24" height="24" class="lazyload" alt="chevron">
+                    </div>
+
+                    <div class="sidebar-panel js-sidebar-panel">
+                        <div class="sidebar-content">
+                            <nav class="sidebar__content-nav js-content-nav"><ol><li data-id="h-introduction-to-tensorflow">Introduction to TensorFlow</li><li data-id="h-tensorflow-applications">TensorFlow applications&nbsp;</li><li data-id="h-installing-the-latest-tensorflow-version-with-cuda-cudnn-and-gpu-support">Installing the latest TensorFlow version with CUDA, cudNN, and GPU support</li><li data-id="h-windows">Windows&nbsp;</li><li data-id="h-macos">MacOS</li><li data-id="h-linux">Linux&nbsp;</li><li data-id="h-conclusion">Conclusion</li></ol></nav>                        </div>
+                    </div>
+                </div>
+            </div>
+                                     <div class="c-popup-sidebar js-popup-sidebar" style="width: 265.162px;">
+                <div class="c-popup-sidebar-ctrl">
+                    <button class="c-popup-sidebar-button js-popup-button">
+                         <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/popup-cancel.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/popup-cancel.svg" width="20" height="20" class="c-popup-sidebar-button__image c-popup-sidebar-button__image--more lazyloaded" alt="chevron">
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/popup-more.svg" width="20" height="20" class="lazyload c-popup-sidebar-button__image c-popup-sidebar-button__image--close" alt="chevron">
+                    </button>
+                </div>
+                <div class="c-popup-sidebar-box js-sidebar-box">
+                    <div class="c-popup-sidebar-content">
+                        <span class="c-popup-sidebar-content__label">Check also:</span>
+                        <a href="https://neptune.ai/blog/extensions-for-tensorflow" class="c-popup-sidebar-content__title">The Best ML Frameworks &amp; Extensions For TensorFlow</a>
+                    </div>
+                </div>
+            </div>
+                    </aside>
+    </div>
+</article>
+        
+        
+<div id="blog-single-post-bottom-cta" class="block-section l-container  l-padding__top--0 l-padding__bottom--0">
+
+    
+
+<section id="cta-block_96de3b6eb1da022dcc3254165805817b" class="block-cta  l-padding__top--xx-large l-padding__bottom--0">
+    <div class="c-wrapper l-grid">
+
+        <div class="c-wrapper__content">
+            <!--suppress CheckEmptyScriptTag -->
+            
+
+            <h2 class="block-header l-padding__top--0 l-padding__bottom--0 block-header--micro animation a-fade-in-up" style="max-width: 100%;" data-animation-duration=".6s" data-animation-delay="0s" data-animation-distance="1rem">
+                <strong>Manage your model metadata in a single place</strong>
+            </h2>
+
+
+<div class="block-buttons-group block-buttons-group--row block-buttons-group--horizontal-left block-buttons-group--vertical-top  l-padding__top--0 l-padding__bottom--0">
+    <!--suppress CheckEmptyScriptTag -->
+    
+
+
+
+
+</div>
+
+
+
+<div class="block-subheader-text  l-padding__top--0 l-padding__bottom--standard animation a-fade-in-up" style="max-width: 100%;" data-animation-duration=".6s" data-animation-delay=".2s" data-animation-distance="1rem">
+    <p>Join 30,000+ ML Engineers &amp; Data Scientists using Neptune to easily log, compare, register, and share ML metadata.</p>
+</div>
+
+
+
+<div class="block-buttons-group block-buttons-group--row block-buttons-group--horizontal-center block-buttons-group--vertical-top animation a-fade-in-up  l-padding__top--0 l-padding__bottom--0" data-animation-duration=".6s" data-animation-delay=".4s" data-animation-distance="1rem">
+    <!--suppress CheckEmptyScriptTag -->
+    
+    <a class="c-button c-button--primary c-button--regular" href="https://ui.neptune.ai/auth/realms/neptune/protocol/openid-connect/registrations?client_id=neptune-frontend&amp;redirect_uri=https%3A%2F%2Fapp.neptune.ai%2F-%2Fteam-trial-create&amp;state=3eda8483-19dd-4ec0-9e2d-50099445418c&amp;response_mode=fragment&amp;response_type=code&amp;scope=openid&amp;nonce=0ad8dd6c-458c-4e9b-863f-c79d73fe3441" target="_blank">
+
+        
+        
+            <span class="c-button__text">
+                Try Neptune for free            </span>
+
+            
+        
+    </a>
+
+
+    <a class="c-button c-button--secondary c-button--regular" href="https://docs.neptune.ai/" target="_blank">
+
+        
+        
+            <span class="c-button__text">
+                Check out the Docs            </span>
+
+            
+        
+    </a>
+
+
+</div>
+
+
+
+<div class="block-buttons-group block-buttons-group--row block-buttons-group--horizontal-center block-buttons-group--vertical-top animation a-fade-in-up  l-padding__top--0 l-padding__bottom--0" data-animation-duration=".6s" data-animation-delay=".6s" data-animation-distance="1rem">
+    <!--suppress CheckEmptyScriptTag -->
+    
+    <a class="c-button c-button--tertiary c-button--regular" href="https://app.neptune.ai/o/showcase/org/onboarding-project/runs/table?viewId=98f66b32-2279-4b73-8210-863021c440ac&amp;product_tour_id=444083" target="_blank">
+
+        
+        
+            <span class="c-button__text">
+                Take an interactive product tour            </span>
+
+                            <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/themes/neptune/img/icon-button-arrow-right.svg" width="12" height="12" alt="" class="c-button__arrow lazyload">
+            
+        
+    </a>
+
+
+</div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+</div>
+
+    </main>
+
+    <div class="c-post-bg">
+        <div class="c-post-bg__inner">
+            <div class="c-post-bg__haze"></div>
+            <div class="c-post-bg__img-holder">
+                <div class="c-post-bg__img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 3 2&#39;%3E%3C/svg%3E" data-src="https://neptune.ai/wp-content/themes/neptune/img/footer-post-illustration.svg" width="800" height="1053" class="lazyload " alt="">
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+<footer class="page-footer">
+    <div class="page-footer__upper">
+        <div class="l-container">
+
+            <div class="page-footer__inner">
+                <div class="page-footer__two-columns">
+                    <div class="page-footer__newsletter">
+
+                                                    <form action="https://neptune.us19.list-manage.com/subscribe?u=8da2bdd288186da3ffeec5626&amp;id=59d3dc2c24" method="post" class="page-footer-newsletter" data-status="init" role="form" data-hs-cf-bound="true">
+
+                                                                    <h4 class="header--small">Newsletter</h4>
+                                
+                                                                    <p class="text--small">Top MLOps articles, case studies, events (and more) in your inbox every month.</p>
+                                
+                                                                    <div class="fz-form__group">
+                                        <span class="fz-form__control-wrap" data-name="your-email">
+                                            <input class="fz-input fz-input--small _ar_hide_" type="email" name="EMAIL" value="" autocomplete="off" aria-required="true" aria-invalid="false" placeholder="Your e-mail" _ar_hide_="width:375.5px;height:36px;margin:0px;position:relative;display:block;">
+                                        </span>
+                                    </div>
+                                                                        <p>
+                                        <button type="submit" class="c-button c-button--primary c-button--small">
+                                        <span class="c-button__text">Get Newsletter</span>
+                                        </button>
+                                    </p>
+                                                            </form>
+                        
+                    </div>
+                    <div class="page-footer__nav">
+                        <ul id="menu-footer-menu-1" class="nav-menu fz-accordion"><li id="menu-item-98" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-98"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#">Product</a>
+<ul class="sub-menu">
+	<li id="menu-item-8846" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8846"><a href="https://neptune.ai/product">Overview</a></li>
+	<li id="menu-item-102" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-102"><a href="https://neptune.ai/resources">Resources</a></li>
+	<li id="menu-item-8850" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8850"><a href="https://neptune.ai/pricing">Pricing</a></li>
+	<li id="menu-item-23022" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23022"><a href="https://neptune.ai/product/deployment-options">Deployment options</a></li>
+	<li id="menu-item-104" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104"><a target="_blank" rel="noopener" href="https://portal.neptune.ai/">Roadmap</a></li>
+	<li id="menu-item-105" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-105"><a target="_blank" rel="noopener" href="https://status.neptune.ai/">Service status</a></li>
+</ul>
+</li>
+<li id="menu-item-26052" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-26052"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#">Solutions</a>
+<ul class="sub-menu">
+	<li id="menu-item-26053" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26053"><a href="https://neptune.ai/product/ml-platform">ML Platform Engineer</a></li>
+	<li id="menu-item-8855" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8855"><a href="https://neptune.ai/product/experiment-tracking">Data Scientist</a></li>
+	<li id="menu-item-8847" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8847"><a href="https://neptune.ai/product/model-registry">ML Engineer</a></li>
+	<li id="menu-item-26055" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26055"><a href="https://neptune.ai/product/ml-team-lead">ML Team Lead</a></li>
+	<li id="menu-item-26054" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26054"><a href="https://neptune.ai/product/enterprise">Enterprise</a></li>
+</ul>
+</li>
+</ul>                        <ul id="menu-footer-menu-2" class="nav-menu fz-accordion"><li id="menu-item-106" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-106"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#">Documentation</a>
+<ul class="sub-menu">
+	<li id="menu-item-107" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-107"><a href="https://docs.neptune.ai/usage/quickstart/">Quickstart</a></li>
+	<li id="menu-item-108" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-108"><a href="https://docs.neptune.ai/">Neptune Docs</a></li>
+	<li id="menu-item-109" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-109"><a href="https://docs.neptune.ai/integrations/">Neptune Integrations</a></li>
+</ul>
+</li>
+</ul>                        <ul id="menu-footer-menu-3" class="nav-menu fz-accordion"><li id="menu-item-110" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-110"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#">Compare</a>
+<ul class="sub-menu">
+	<li id="menu-item-11889" class="menu-item menu-item-type-post_type menu-item-object-compare menu-item-11889"><a href="https://neptune.ai/vs/wandb">Neptune vs Weights &amp; Biases</a></li>
+	<li id="menu-item-11891" class="menu-item menu-item-type-post_type menu-item-object-compare menu-item-11891"><a href="https://neptune.ai/vs/mlflow">Neptune vs MLflow</a></li>
+	<li id="menu-item-11890" class="menu-item menu-item-type-post_type menu-item-object-compare menu-item-11890"><a href="https://neptune.ai/vs/tensorboard">Neptune vs TensorBoard</a></li>
+	<li id="menu-item-114" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-114"><a href="https://neptune.ai/vs">Other Comparisons</a></li>
+	<li id="menu-item-9976" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9976"><a href="https://neptune.ai/blog/best-ml-experiment-tracking-tools">ML Experiment Tracking Tools</a></li>
+	<li id="menu-item-9978" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9978"><a href="https://neptune.ai/blog/best-metadata-store-solutions">ML Metadata Stores</a></li>
+	<li id="menu-item-9982" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9982"><a href="https://neptune.ai/blog/ml-model-registry-best-tools">ML Model Registries</a></li>
+</ul>
+</li>
+</ul>                        <ul id="menu-footer-menu-4" class="nav-menu fz-accordion"><li id="menu-item-115" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-115"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#">Community</a>
+<ul class="sub-menu">
+	<li id="menu-item-11332" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-11332"><a href="https://neptune.ai/blog">MLOps Blog</a></li>
+	<li id="menu-item-21772" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21772"><a href="https://neptune.ai/ml-platform-podcast">ML Platform Podcast</a></li>
+	<li id="menu-item-118" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-118"><a target="_blank" rel="noopener" href="https://neptune.us19.list-manage.com/subscribe?u=8da2bdd288186da3ffeec5626&amp;id=59d3dc2c24">MLOps Newsletter</a></li>
+</ul>
+</li>
+</ul>                        <ul id="menu-footer-menu-5" class="nav-menu fz-accordion"><li id="menu-item-119" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-119"><a href="https://neptune.ai/blog/installing-tensorflow-2-gpu-guide#">Company</a>
+<ul class="sub-menu">
+	<li id="menu-item-11999" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11999"><a href="https://neptune.ai/about-us">About us</a></li>
+	<li id="menu-item-11997" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11997"><a href="https://neptune.ai/customers">Customers</a></li>
+	<li id="menu-item-11998" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11998"><a href="https://neptune.ai/jobs">Careers</a></li>
+	<li id="menu-item-21974" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21974"><a href="https://security.neptune.ai/">Security portal and SOC 2</a></li>
+</ul>
+</li>
+</ul>                    </div>
+                </div>
+
+                                                            <ul class="page-footer__seo-links">
+                                                            
+                                                                    <li class="page-footer__seo-links-item">
+                                        <a href="https://neptune.ai/blog/best-mlops-tools" class="footer-link">
+                                            The Best MLOps Tools                                         </a>
+                                    </li>
+                                
+                                                            
+                                                                    <li class="page-footer__seo-links-item">
+                                        <a href="https://neptune.ai/blog/mlops-at-reasonable-scale" class="footer-link">
+                                            MLOps at a Reasonable Scale                                        </a>
+                                    </li>
+                                
+                                                            
+                                                                    <li class="page-footer__seo-links-item">
+                                        <a href="https://neptune.ai/blog/ml-metadata-store" class="footer-link">
+                                            ML Metadata Store                                        </a>
+                                    </li>
+                                
+                                                            
+                                                                    <li class="page-footer__seo-links-item">
+                                        <a href="https://neptune.ai/blog/mlops" class="footer-link">
+                                            MLOps: What, Why, and How                                        </a>
+                                    </li>
+                                
+                                                            
+                                                                    <li class="page-footer__seo-links-item">
+                                        <a href="https://neptune.ai/experiment-tracking" class="footer-link">
+                                            Experiment Tracking in Machine Learning                                        </a>
+                                    </li>
+                                
+                                                    </ul>
+                                    
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer__bottom">
+        <div class="l-container">
+            <div class="page-footer__inner">
+                <div class="page-footer__social-media-links">
+                                                                                                        
+                                                                    <a href="https://www.linkedin.com/company/neptuneai" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+
+                                                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2022/08/icon-linked-in.svg" alt="social icon" width="20" height="20" class="footer-link__icon lazyload">
+                                        
+                                                                            </a>
+                                
+                                                            
+                                                                    <a href="https://twitter.com/neptune_ai" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+
+                                                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2022/08/icon-twitter.svg" alt="social icon" width="20" height="20" class="footer-link__icon lazyload">
+                                        
+                                                                            </a>
+                                
+                                                            
+                                                                    <a href="https://github.com/neptune-ai" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+
+                                                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2022/08/icon-github.svg" alt="social icon" width="20" height="20" class="footer-link__icon lazyload">
+                                        
+                                                                            </a>
+                                
+                                                            
+                                                                    <a href="https://www.facebook.com/neptuneAI" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+
+                                                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2022/08/icon-facebook.svg" alt="social icon" width="20" height="20" class="footer-link__icon lazyload">
+                                        
+                                                                            </a>
+                                
+                                                            
+                                                                    <a href="https://www.youtube.com/channel/UCvOJU-ubyUqxGSDRN7xK4Ng" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+
+                                                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2022/08/icon-youtube.svg" alt="social icon" width="20" height="20" class="footer-link__icon lazyload">
+                                        
+                                                                            </a>
+                                
+                                                            
+                                                                    <a href="https://open.spotify.com/show/4kGi82i4wTYgHbWmVMri5x" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+
+                                                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/01/icon-spotify.svg" alt="social icon" width="20" height="20" class="footer-link__icon lazyload">
+                                        
+                                                                            </a>
+                                
+                                                            
+                                                                    <a href="https://podcasts.apple.com/us/podcast/mlops-live/id1634179447" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+
+                                                                                    <img src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/image-ratio-holder.svg" data-src="https://neptune.ai/wp-content/uploads/2023/01/icon-apple-podcast.svg" alt="social icon" width="20" height="20" class="footer-link__icon lazyload">
+                                        
+                                                                            </a>
+                                
+                                                                        
+                </div>
+
+                <div class="page-footer__law-info-links">
+                                                                                                        
+                                                                    <a href="https://neptune.ai/wp-content/uploads/2022/10/terms-of-service.pdf" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+                                        Terms of service                                    </a>
+                                
+                                                            
+                                                                    <a href="https://neptune.ai/wp-content/uploads/2022/10/privacy-policy.pdf" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">
+                                        Privacy policy                                    </a>
+                                
+                                                                                        </div>
+
+                <div class="page-footer__copyrights">
+                                            <p class="text--micro">Copyright © 2022 Neptune Labs. All rights reserved.</p>
+                                    </div>
+            </div>
+        </div>
+    </div>
+
+    <picture class="page-footer__background">
+        <source data-srcset="https://neptune.ai/wp-content/themes/neptune/img/footer-stars--1440w.png" width="1440" height="574" media="(min-width: 1100px)">
+
+        <source data-srcset="https://neptune.ai/wp-content/themes/neptune/img/footer-stars--1100w.png" media="(min-width: 768px)" width="1101" height="574">
+
+        <source data-srcset="https://neptune.ai/wp-content/themes/neptune/img/footer-stars--768w.png" media="(min-width: 414px)" width="770" height="574">
+
+        <img class="page-footer__background-image lazyload" data-src="https://neptune.ai/wp-content/themes/neptune/img/footer-stars--414w.png" alt="" width="443" height="750">
+    </picture>
+
+</footer>
+
+    <!--  -->
+<style>
+			.sd-social-icon .sd-content ul li a.sd-button>span {
+				margin-left: 0;
+			}
+		</style><script defer="" id="bilmur" data-provider="wordpress.com" data-service="atomic" src="https://s0.wp.com/wp-content/js/bilmur.min.js?m=202332"></script>
+
+<!-- Consent Management powered by Complianz | GDPR/CCPA Cookie Consent https://wordpress.org/plugins/complianz-gdpr -->
+
+					<div id="cmplz-manage-consent" data-nosnippet="true"><button class="cmplz-btn cmplz-manage-consent manage-consent-1 cmplz-show">Manage consent</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="rocket-browser-checker-js-after" type="text/javascript">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/neptune.ai","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script id="rocket-preload-links-js-after" type="text/javascript">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script data-service="jetpack-statistics" data-category="statistics" defer="" type="text/plain" data-cmplz-src="https://stats.wp.com/e-202332.js" id="jetpack-stats-js"></script>
+<script id="jetpack-stats-js-after" type="text/javascript">
+_stq = window._stq || [];
+_stq.push([ "view", {v:'ext',blog:'211928962',post:'5640',tz:'0',srv:'neptune.ai',hp:'atomic',ac:'2',amp:'0',j:'1:12.5-a.7'} ]);
+_stq.push([ "clickTrackerInit", "211928962", "5640" ]);
+</script>
+<script type="text/javascript" id="cmplz-cookiebanner-js-extra">
+/* <![CDATA[ */
+var complianz = {"prefix":"cmplz_","user_banner_id":"1","set_cookies":[],"block_ajax_content":"0","banner_version":"31","version":"6.5.3","store_consent":"","do_not_track_enabled":"","consenttype":"optin","region":"eu","geoip":"","dismiss_timeout":"","disable_cookiebanner":"","soft_cookiewall":"","dismiss_on_scroll":"","cookie_expiry":"365","url":"https:\/\/neptune.ai\/wp-json\/complianz\/v1\/","locale":"lang=en&locale=en_US","set_cookies_on_root":"0","cookie_domain":"","current_policy_id":"15","cookie_path":"\/","categories":{"statistics":"statistics","marketing":"marketing"},"tcf_active":"","placeholdertext":"Click to accept {category} cookies and enable this content","aria_label":"Click to accept {category} cookies and enable this content","css_file":"https:\/\/neptune.ai\/wp-content\/uploads\/complianz\/css\/banner-{banner_id}-{type}.css?v=31","page_links":{"eu":{"cookie-statement":{"title":"Contact","url":"https:\/\/neptune.ai\/contact-us"},"privacy-statement":{"title":"Contact","url":"https:\/\/neptune.ai\/contact-us"}}},"tm_categories":"1","forceEnableStats":"","preview":"","clean_cookies":""};
+/* ]]> */
+</script>
+
+
+
+
+
+    <!-- Google Optimize Integration-->
+    <script src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/optimize.js.download"></script>
+
+    <!-- Heap Integration -->
+    
+
+    	<script src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/e790a484e29e20a9c15286f3fb1d4636.js.download" data-minify="1"></script>
+
+
+<meta name="google-site-verification" content="HV7mAziXIZE7uHdEiuXiPv6eRLY4fifJqFVM671TABA">
+<script type="text/javascript" id="hs-script-loader" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/4404891.js(1).download"></script>
+<script type="text/javascript" id="">(function(){var a=document.createElement("script"),b=document.head;a.async=1;a.src="https://monitor.fraudblocker.com/fbt.js?sid\x3dNTlFclgiJSrjv6QOTF8zE";b.appendChild(a)})();</script>
+<noscript>
+  <a href="https://fraudblocker.com" rel="nofollow">
+    <img src="https://monitor.fraudblocker.com/fbt.gif?sid=NTlFclgiJSrjv6QOTF8zE" alt="Fraud Blocker">
+  </a>
+</noscript>
+<iframe owner="archetype" title="archetype" style="display: none; visibility: hidden;" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/saved_resource.html"></iframe><div style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon682253251905"><img style="width:0px; height:0px; display:none; visibility:hidden;" id="batBeacon293080096071" width="0" height="0" alt="" src="./Installing TensorFlow 2 GPU [Step-by-Step Guide]_files/0"></div>
+</body></html>
